@@ -12,7 +12,7 @@
 
 
 
-<title>Hello World | amb1t10n&#39;s blog</title>
+<title>C语言指针 | amb1t10n&#39;s blog</title>
 
 
 
@@ -174,7 +174,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">C语言指针</h1>
             
                 <div class="post-meta">
                     
@@ -183,7 +183,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">一月 15, 2020&nbsp;&nbsp;10:58:17</a>
+                        Date: <a href="#">一月 14, 2020&nbsp;&nbsp;9:58:48</a>
                         </span>
                     
                     
@@ -192,20 +192,27 @@
         </header>
 
         <div class="post-content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+            <p>对于很多人来说，指针这块东西确实让人难懂<br>但是他的名字很形象地表现他的性质<br>他就是一个指向某块数据的类型，就类似于一种快捷方式<br>你可以用指针迅速访问你要代表的那个变量<br>利用指针对原来那个变量做出各种操作 </p>
+<hr>
+<h2 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h2><p>指针也是一种数据类型，他的值是一串16进制的数，表示的是地址，也就是在内存中，所代表的数据的位置，<br>定义指针的时候也是那几种类型<br>比如<code>char*</code>、<code>int*</code>、<code>double*</code>等等，也可以是指向指针的指针，比如 <code>int**</code> ，指向指针的指针的指针的……<del>套娃</del>。但是他比常用的数据类型还多了一种<code>void*</code>也就是可以指向任何类型的指针<br>他定义的时候，是通过<code>*</code>来区别是指针还是普通的变量，也使用 <code>*</code> 来访问所代表的变量的值  </p>
+<pre><code>int *p,q;</code></pre><p>在这句中，只有p是指针，而q是普通的<code>int</code>型的变量<br><code>*</code>只是一种标记，在哪个变量前面就代表哪个就是指针，并没有<code>int *</code>这种类型。<br>当<code>*</code>与<code>[]</code>，<code>const</code>组合起来的时候，如果对指针和<code>[]</code>的理解不是很到位的话，就会产生疑惑。你可能回想：这是由哪个鬼<del>(zhi)</del>才<del>(zhang)</del>写出来的,这种写法，有什么作用</p>
+<h2 id="指针定义"><a href="#指针定义" class="headerlink" title="指针定义"></a>指针定义</h2><p><code>int</code>中存储的变量是整数，<code>double</code>中是双精度浮点数，那么指针呢？<br><strong>指针中存储的是地址，所以赋值的时候，是用<code>&amp;</code>取址来赋值</strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+int mian(){
+    int n=5;
+    int *a=&amp;n;
+    printf(&quot;%d %d&quot;,n,*a);
+    return 0;
+}</code></pre><p>在这块代码中，定义了一个指针 <code>a</code> ，并且对<code>a</code>进行赋值，也就是<code>n</code>的地址，<code>&amp;</code>在这则是取址符号，即取出<code>n</code>的地址，使得<code>a</code>指向<code>n</code><br>在下一行的<code>printf</code>中，由于<code>*</code>在<code>a</code>前，把<code>a</code>指向的变量取出，所以两个值是相同的  </p>
+<p>在定义的时候可以将一个指针的值赋值给另一个<br>就比如<code>int *p=a</code>,在此时，<code>a</code>中的地址赋值给<code>p</code>,    <code>p</code>就也指向了<code>n</code></p>
+<h2 id="指针的应用"><a href="#指针的应用" class="headerlink" title="指针的应用"></a>指针的应用</h2><p>众所周知<del>（学了C的人都知道）</del>，C的函数中，<code>return</code>只能返回一个值，而想要在函数中返回两个值甚至多个值，就需要通过函数传入所要改变的值的地址，在函数内部进行操作，从而改变函数外这个变量的值，进而达到返回多个值的目的   </p>
+<pre><code>#include &lt;stdio.h&gt;
+int main(){
+    int a=4,b=5;
+    swap1(a,b);
+    swap2(&amp;a,&amp;b)
+    return 0;
+}</code></pre>
         </div>
 
         
@@ -232,6 +239,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/study/"># study</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -242,8 +253,8 @@
         </section>
         <section class="post-nav">
             
+                <a class="prev" rel="prev" href="/2020/01/15/hello-world/">Hello World</a>
             
-            <a class="next" rel="next" href="/2020/01/14/my-annual-summary/">C语言指针</a>
             
         </section>
 
