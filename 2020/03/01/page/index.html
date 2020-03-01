@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="amb1t10n">
+
+
+
+
+
+<title>Note of Discrete Mathematics and Its Applications | amb1t10n&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/image/timg.jfif">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Ambition&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Ambition&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Note of Discrete Mathematics and Its Applications</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">amb1t10n</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 1, 2020&nbsp;&nbsp;16:00:48</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/note/">note</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h1><h2 id="1-1-propositional-logical命题逻辑"><a href="#1-1-propositional-logical命题逻辑" class="headerlink" title="1.1 propositional logical命题逻辑"></a>1.1 propositional logical命题逻辑</h2><p>Proposition<strong>【Definition】</strong>：A <strong><em>proposition</em></strong> is a declarative sentence that is either true or false, but <strong>not both</strong>.<br>例如：</p>
+<ul>
+<li><code>1+1=2</code> <code>华盛顿特区是美利坚合众国的首都</code>are  True propositions  </li>
+<li><code>2+3=1</code>is false proposition  </li>
+</ul>
+<p><font color = red>Notice</font>：The assert <code>The statement is false proposition</code> is <strong>not</strong> a proposition.<br>Because no matter what the truth value is,there is a contradition.  </p>
+<h2 id="1-2-Logical-operators"><a href="#1-2-Logical-operators" class="headerlink" title="1.2 Logical operators"></a>1.2 Logical operators</h2><h3 id="1-Negation-NOT-lnot"><a href="#1-Negation-NOT-lnot" class="headerlink" title="1 Negation(NOT)$\lnot$"></a>1 Negation(NOT)$\lnot$</h3><p><strong>【Definition】</strong>Let $p$ be a proposition.The negation of p,$\lnot p$ is the proposition”It is not the case that $p$”<br><strong>Example</strong>: $p$:<code>Michael’s PC runs Linux</code>$\lnot p$:<code>Michael’s PC does not run Linux</code>  </p>
+<h3 id="2-Conjunction-AND-bigwedge-（和取）"><a href="#2-Conjunction-AND-bigwedge-（和取）" class="headerlink" title="2. Conjunction(AND)$\bigwedge$（和取）"></a>2. Conjunction(AND)$\bigwedge$（和取）</h3><p><strong>【Definition】</strong>:Let $p$ and q be propositions. The conjunction of $p$ and $q$, denoted by $p \bigwedge q$, is the proposition<br>“$p$ and $q$.” The conjunction $p \bigwedge q$ is true when both $p$ and $q$ are true and is false otherwise.<br><strong>Example</strong> :<code>I have an apple and a pencil.</code></p>
+<h3 id="3-Disjunction-OR-bigvee-（析取）"><a href="#3-Disjunction-OR-bigvee-（析取）" class="headerlink" title="3. Disjunction(OR)$\bigvee$（析取）"></a>3. Disjunction(OR)$\bigvee$（析取）</h3><p><strong>【Definition】</strong>Let $p$ and $q$ be propositions. The disjunction of $p$ and $q$, denoted by $p \bigvee q$, is the proposition<br>“$p$ or $q$.” The disjunction $p \bigvee q$ is false when both $p$ and $q$ are false and is true otherwise.</p>
+<h3 id="4-Exclusive-or-XOR-bigoplus-（异或）"><a href="#4-Exclusive-or-XOR-bigoplus-（异或）" class="headerlink" title="4. Exclusive or(XOR)$\bigoplus$（异或）"></a>4. Exclusive or(XOR)$\bigoplus$（异或）</h3><p><strong>【Definition】</strong>:$p \bigoplus q$ is $p$ or $q$ but not both.</p>
+<h3 id="5-Conditional-IF–THEN-rightarrow"><a href="#5-Conditional-IF–THEN-rightarrow" class="headerlink" title="5. Conditional(IF–THEN)$\rightarrow$"></a>5. Conditional(IF–THEN)$\rightarrow$</h3><p><strong>【Definition】</strong>The conditional statement $p \rightarrow q$ is the proposition “if $p$, then $q$.”<br>$p \rightarrow q$ can be exprssed as:<br><img src="https://i.loli.net/2020/03/01/1CcVuxpAi5l7HUv.png" alt="捕获.PNG"></p>
+<h3 id="6-Biconditional-IF-AND-ONLY-IF-longleftrightarrow"><a href="#6-Biconditional-IF-AND-ONLY-IF-longleftrightarrow" class="headerlink" title="6. Biconditional(IF AND ONLY IF)$\longleftrightarrow$"></a>6. Biconditional(IF AND ONLY IF)$\longleftrightarrow$</h3><p><strong>【Definition】</strong>:Let $p$ and $q$ be  propositions. The biconditional statement  $p  \leftrightarrow  q$, is the proposition “$p$ if and only if (iff) $q$.”<br>$p \longleftrightarrow q$ can be exprssed as:<br><img src="https://i.loli.net/2020/03/01/pYTtKZC2BSlz5Vq.png" alt="捕获.PNG"></p>
+<h3 id="7-Precedence-of-Logical-Operators"><a href="#7-Precedence-of-Logical-Operators" class="headerlink" title="7.Precedence of Logical Operators"></a>7.Precedence of Logical Operators</h3><table>
+<thead>
+<tr>
+<th>operator</th>
+<th>precedence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\lnot$</td>
+<td>1</td>
+</tr>
+<tr>
+<td>$\bigwedge$</td>
+<td>2</td>
+</tr>
+<tr>
+<td>$\bigvee$</td>
+<td>3</td>
+</tr>
+<tr>
+<td>$\rightarrow$</td>
+<td>4</td>
+</tr>
+<tr>
+<td>$\leftrightarrow$</td>
+<td>5</td>
+</tr>
+</tbody></table>
+<h3 id="8-Truth-table"><a href="#8-Truth-table" class="headerlink" title="8.Truth table"></a>8.Truth table</h3><table>
+<thead>
+<tr>
+<th>$x$</th>
+<th>$y$</th>
+<th>$\lnot x$</th>
+<th>$x \bigwedge y$</th>
+<th>$x \bigvee y$</th>
+<th>$x \bigoplus y$</th>
+<th>$x \leftarrow y$</th>
+<th>$x \leftrightarrow y$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<h2 id="1-3-Translating-English-sentences"><a href="#1-3-Translating-English-sentences" class="headerlink" title="1.3 Translating English sentences"></a>1.3 Translating English sentences</h2><p>Example:Translate <code>You can access the Internet from campus only if you are a computer science major or you are not a freshman</code><br><strong>Solution</strong>:<br>Let $a$:<code>you can access the Internet from campus</code><br>$c$:<code>you are a computer science major</code><br>$f$:<code>you are a freshman</code><br>This sentence can be represented as <code>$a \rightarrow (c \bigvee \lnot f)$</code>  </p>
+<h2 id="1-4-Logical-Equivalences"><a href="#1-4-Logical-Equivalences" class="headerlink" title="1.4 Logical Equivalences"></a>1.4 Logical Equivalences</h2><p><strong>【Definition】</strong>:The compound propositions p and q are called logically equivalent if $p \leftrightarrow$ is a tautology.<br><strong>Notation</strong>:$p \equiv q$ or $p \Leftrightarrow q$<br><img src="https://i.loli.net/2020/03/01/SCHxZnhyiWo78tG.png" alt="捕获.PNG"><br>NOR:The proposition p NOR q is true when both p and q are false, and it is false otherwise. The operator $\downarrow$ is called Peirce arrow. </p>
+<h2 id="1-5-Predicates-and-Quantifiers"><a href="#1-5-Predicates-and-Quantifiers" class="headerlink" title="1.5 Predicates and Quantifiers"></a>1.5 Predicates and Quantifiers</h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>amb1t10n</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>This is my world.</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/study/"># study</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/01/14/my-annual-summary/">C语言指针</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© amb1t10n | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+    <script src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js"></script>
+</body>
+</html>
