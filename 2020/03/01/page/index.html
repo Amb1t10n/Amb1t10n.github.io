@@ -331,9 +331,69 @@
 <td>T</td>
 </tr>
 </tbody></table>
-<h2 id="1-3-Translating-English-sentences"><a href="#1-3-Translating-English-sentences" class="headerlink" title="1.3 Translating English sentences"></a>1.3 Translating English sentences</h2><p>Example:Translate <code>You can access the Internet from campus only if you are a computer science major or you are not a freshman</code><br><strong>Solution</strong>:<br>Let $a$:<code>you can access the Internet from campus</code><br>$c$:<code>you are a computer science major</code><br>$f$:<code>you are a freshman</code><br>This sentence can be represented as <code>$a \rightarrow (c \bigvee \lnot f)$</code>  </p>
-<h2 id="1-4-Logical-Equivalences"><a href="#1-4-Logical-Equivalences" class="headerlink" title="1.4 Logical Equivalences"></a>1.4 Logical Equivalences</h2><p><strong>【Definition】</strong>:The compound propositions p and q are called logically equivalent if $p \leftrightarrow$ is a tautology.<br><strong>Notation</strong>:$p \equiv q$ or $p \Leftrightarrow q$<br><img src="https://i.loli.net/2020/03/01/SCHxZnhyiWo78tG.png" alt="捕获.PNG"><br>NOR:The proposition p NOR q is true when both p and q are false, and it is false otherwise. The operator $\downarrow$ is called Peirce arrow. </p>
-<h2 id="1-5-Predicates-and-Quantifiers"><a href="#1-5-Predicates-and-Quantifiers" class="headerlink" title="1.5 Predicates and Quantifiers"></a>1.5 Predicates and Quantifiers</h2>
+<h3 id="Translating-English-sentences"><a href="#Translating-English-sentences" class="headerlink" title="Translating English sentences"></a>Translating English sentences</h3><p>Example:Translate <code>You can access the Internet from campus only if you are a computer science major or you are not a freshman</code><br><strong>Solution</strong>:<br>Let $a$:<code>you can access the Internet from campus</code><br>$c$:<code>you are a computer science major</code><br>$f$:<code>you are a freshman</code><br>This sentence can be represented as $a \rightarrow (c \bigvee \lnot f)$  </p>
+<h2 id="1-3-Logical-Equivalences"><a href="#1-3-Logical-Equivalences" class="headerlink" title="1.3 Logical Equivalences"></a>1.3 Logical Equivalences</h2><p><strong>【Definition】</strong>:The compound propositions p and q are called logically equivalent if $p \leftrightarrow$ is a tautology.<br><strong>Notation</strong>:$p \equiv q$ or $p \Leftrightarrow q$<br><img src="https://i.loli.net/2020/03/01/SCHxZnhyiWo78tG.png" alt="捕获.PNG"><br>NOR:The proposition p NOR q is true when both p and q are false, and it is false otherwise. The operator $\downarrow$ is called Peirce arrow. </p>
+<h2 id="1-4-Predicates-and-Quantifiers"><a href="#1-4-Predicates-and-Quantifiers" class="headerlink" title="1.4 Predicates and Quantifiers"></a>1.4 Predicates and Quantifiers</h2><h2 id="1-5-Nested-quantifiers"><a href="#1-5-Nested-quantifiers" class="headerlink" title="1.5 Nested quantifiers"></a>1.5 Nested quantifiers</h2><h3 id="nested-quantifiers"><a href="#nested-quantifiers" class="headerlink" title="nested quantifiers"></a>nested quantifiers</h3><p><strong>A statement can have multiple variables</strong><br><strong>【Definition】</strong>:Two quantifiers are nested if one is within the scope of the other.<br>Example:Let C(x,y)denote “x has taken course y”where the domain of x and y consist of all ZJU students and all CS courses.<br>$\forall x \exists y C(x,y)$ :Every student at ZJU has taken some CS course.<br>$\exists x \forall y C(x,y)$ :Some student at ZJU has taken all CS courses.<br><strong>Translate</strong>:  </p>
+<ol>
+<li>Translate the statement $\forall x(C(x) \bigvee \exists y(C(x) \bigwedge F(x,y)))$into English,where $C(x)$ is “x has a computer,”$F(x)$<br>is “x and y are friends”and the domain for both x and y consists of all students at ZJU.<br><strong>Solution:</strong>:Every student at ZJU has a computer or has a friend who has a computer.</li>
+<li>Express the statement “Everyone has exactly one best friend” as a logical expression with a domain consisting of all people.<br><strong>Solution</strong>:”For every person x,x has exactly one best friend”$\Rightarrow$”There is a person y who is the best friend of x,and furthermore,that for every person z,if z is not y,then z is not the best friend of x.”<br>Let $B(x,y)$ be the statement “y is the best friend of x”  <center>  
+$\forall x \exists y \forall z (B(x,y) \bigwedge ((z \neq y)\rightarrow \lnot B(x,z)))$
+</center>  
+
+</li>
+</ol>
+<h3 id="The-order-of-quantifiers"><a href="#The-order-of-quantifiers" class="headerlink" title="The order of quantifiers"></a><strong>The order of quantifiers</strong></h3><p>the order of nested quantifiers matters if quantifiers are different types:  </p>
+<center>$\forall x \forall y \equiv \forall y \forall x$  
+$\exists x \forall yP(x,y) \neq \forall y \exists x P(x,y)$
+</center>  
+
+
+<p><img src="https://i.loli.net/2020/03/02/db9D1RXFjx6v2ko.png" alt="捕获.PNG">  </p>
+<h3 id="Negating-Nested-quantifers"><a href="#Negating-Nested-quantifers" class="headerlink" title="Negating Nested quantifers"></a>Negating Nested quantifers</h3><p>Negating nested quantifiers by successively applying the rules for negating statements involving a single quantifier.<br>Example:</p>
+<ol>
+<li>Express the negation of the statement $\forall x \exists y (xy=1)$ so that no negation precedes a quantifiers.<br><strong>Solution</strong>:<center>$\lnot \forall x \exists y (xy=1)  \<br>\equiv \exists x(\lnot \exists (xy=1))  \<br>\equiv \exists x \forall y (\lnot (xy=1))  \<br>\equiv \exists x \forall y (xy \neq 1)$</center>  </li>
+</ol>
+<h2 id="Propositional-Normal-Forms"><a href="#Propositional-Normal-Forms" class="headerlink" title="Propositional Normal Forms"></a>Propositional Normal Forms</h2><p>Literal:$p$  $or$ $\lnot p$<br><strong>【Definition】</strong>:Disjunctions(conjunctions) with literals as disjuncts are calles is djunctions(conjunctions) clauses.Disjunctive and conjunctive clauses are simply called clauses.<br><strong>Examples:</strong></p>
+<ul>
+<li>$q \lor r$  &emsp; Disjunctive clause</li>
+<li>$\lnot q \land p$  &emsp; Conjunctive clause</li>
+<li>$p \land q \lor r$ &emsp; Not a clause<h3 id="Conjunctive-Normal-Form-CNF"><a href="#Conjunctive-Normal-Form-CNF" class="headerlink" title="Conjunctive Normal Form(CNF)"></a>Conjunctive Normal Form(CNF)</h3></li>
+</ul>
+<p><strong>【Definition】</strong> A conjunction with disjunctive clauses as its conjuncts is said to be in conjunctive normal form.<br>Examples:</p>
+<ul>
+<li>$p \land (q \lor r)$ &emsp; T  </li>
+<li>$\lnot q \land p$ &emsp; T</li>
+<li>$p \land ((p \land q) \lor r$&emsp;F  <h3 id="Disjunctive-Normal-Form-DNF"><a href="#Disjunctive-Normal-Form-DNF" class="headerlink" title="Disjunctive Normal Form(DNF)"></a>Disjunctive Normal Form(DNF)</h3></li>
+</ul>
+<p><strong>【Definition】</strong>A disjunction with conjunctive clauses as its disjuncts is said to be in disjunctive normal form.<br><strong>Examples</strong>:  </p>
+<ul>
+<li>$(p \land q)\lor (p \land \lnot q)$ &emsp; T</li>
+<li>$\lnot(p \land q) \lor r$ &emsp; F  <h3 id="how-to-obtain-Normal-Forms"><a href="#how-to-obtain-Normal-Forms" class="headerlink" title="how to obtain Normal Forms"></a>how to obtain Normal Forms</h3>Use logical Equivalences.</li>
+</ul>
+<p><strong>Examples</strong></p>
+<center>
+$\lnot ((p \lor q) \land \lnot r)  
+\Leftrightarrow \lnot (p \lor \lnot q) \lor r  
+\Leftrightarrow (\lnot p \land q) \lor r
+\Leftrightarrow (\lnot p \lor r) \land (q\lor r)$
+</center>  
+
+<h3 id="Full-Disjunctive-Normal-Forms"><a href="#Full-Disjunctive-Normal-Forms" class="headerlink" title="Full Disjunctive Normal Forms"></a>Full Disjunctive Normal Forms</h3><p><strong>【Definition】</strong>A minterm is a conjunction of literals in which each variable is represented exactly once.<br><strong>【Definition】</strong>If a formula is expressed as a disjunction of minterms, it is said to be in full disjunctive normal form.<br>Example :</p>
+<center>$(p \land q \land r) \lor (p \land q \land \lnot r) \lor (\lnot p \land q \land r) \lor (\lnot p \land \lnot q \land \lnot r)$</center>  
+
+<h3 id="Prenex-Normal-Form"><a href="#Prenex-Normal-Form" class="headerlink" title="Prenex Normal Form"></a>Prenex Normal Form</h3><p><strong>【Definition】</strong>A statement is in prenex normal form iff it is of the form  $Q_1x_1…Q_nx_n B$,where $Q_i (i=1,2…n)$ is $\land $ or $\lor$ and the predicate B is quantifier free.<br>Examples:</p>
+<ul>
+<li>$\land xP(x) \lor \land xQ(x)$ F</li>
+<li>$\land x \land y \lnot (P(x) \rightarrow Q(y))$ T   <h4 id="Transforming-to-Prenex-NOrmal-Form"><a href="#Transforming-to-Prenex-NOrmal-Form" class="headerlink" title="Transforming to Prenex NOrmal Form"></a>Transforming to Prenex NOrmal Form</h4><img src="https://i.loli.net/2020/03/02/XLroTPQqHnU2h93.png" alt="step1"><br><img src="https://i.loli.net/2020/03/02/gSTVLkMmEeDGRO1.png" alt="捕获.PNG"><br><img src="https://i.loli.net/2020/03/02/Cwjpx2U34qluhRK.png" alt="捕获1.PNG"><h2 id="1-6-Rules-of-Inference"><a href="#1-6-Rules-of-Inference" class="headerlink" title="1.6 Rules of Inference"></a>1.6 Rules of Inference</h2><h3 id="Valid-Arguments"><a href="#Valid-Arguments" class="headerlink" title="Valid Arguments"></a>Valid Arguments</h3></li>
+</ul>
+<p><strong>【Definition】</strong> An argument in propositional logic is a sequence of  propositions.<br>All but the final proposition in the argument are called <strong>premises</strong> and the final proposition is called the <strong>conclusion</strong>.<br><strong>An argument is valid</strong> if the truth of all its premises implies that the conclusion is true.<br><strong>An argument form</strong> in propositional logic is a sequence of compound propositions involving propositional variables.<br><strong>An argument form is valid</strong> if no matter which particular propositions are substituted for the propositional variables in its premises, the conclusion is true if the premises are all true.<br>Examples:</p>
+<ul>
+<li>“If you have a current password, then you can log onto the network”<font color=red>（premises）  </font></li>
+<li>“You have a current password”<font color=red>（premises）  </font>  </li>
+<li>“You can log onto the network”<font color=red>（conlusion）  </font>  </li>
+<li>$((p \rightarrow q)\land p)\rightarrow q$<br><img src="https://i.loli.net/2020/03/02/yl8dM6D5BzIn2mu.png" alt="图片1.png">  <h3 id="Rules-of-Inference"><a href="#Rules-of-Inference" class="headerlink" title="Rules of Inference"></a>Rules of Inference</h3><img src="https://i.loli.net/2020/03/02/6eyoSHEiAYQVLwK.png" alt="捕获.PNG"><br><img src="https://i.loli.net/2020/03/02/vYH6p2ThXKJL9P5.png" alt="捕获1.PNG"><br><img src="https://i.loli.net/2020/03/02/KvqiIjDoa9Ad62b.png" alt="捕获2.PNG"><br><img src="https://i.loli.net/2020/03/02/FfjsJA6K2LuRhYl.png" alt="捕获3.PNG">  </li>
+</ul>
+
         </div>
 
         
