@@ -150,7 +150,7 @@ template {
   font-display: swap;
 }
 html {
-  font-family: 'Microsoft Jhenghei', Lantinghei SC, 'lanting', PingFang SC, Seguo UI, Microsoft Yahei, Arial;
+  font-family: Seguo UI, Microsoft Yahei, Arial, 'Microsoft Jhenghei', Lantinghei SC, 'lanting', PingFang SC,;
 }
 html::-webkit-scrollbar {
   width: 8px;
@@ -165,7 +165,7 @@ html::-webkit-scrollbar-thumb:hover {
   background-color: #ddd;
 }
 body {
-  font-size: 11pt;
+  font-size: 13pt;
   font-weight: normal;
   line-height: 2em;
   background-color: #fff;
@@ -869,7 +869,7 @@ content
 }
 .post-content img {
   display: block;
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   margin: 0 auto;
   overflow: hidden;
