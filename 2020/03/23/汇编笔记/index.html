@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="amb1t10n">
+
+
+
+
+
+<title>汇编笔记 | amb1t10n&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/image/timg.jfif">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Ambition&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Ambition&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">汇编笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">amb1t10n</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 23, 2020&nbsp;&nbsp;12:59:54</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="汇编笔记"><a href="#汇编笔记" class="headerlink" title="汇编笔记"></a>汇编笔记</h1><h2 id="一、汇编代码初见及其编译及调试"><a href="#一、汇编代码初见及其编译及调试" class="headerlink" title="一、汇编代码初见及其编译及调试"></a>一、汇编代码初见及其编译及调试</h2><p>###1、sum.asm<br>    .386<br>    .model flat, stdcall<br>    option casemap :none</p>
+<pre><code>include include\windows.inc
+include include\kernel32.inc
+include include\user32.inc
+
+includelib lib\kernel32.lib
+includelib lib\user32.lib
+
+.data
+result db 100 dup(0); dup:duplicate重复
+;char result[100]={0};
+format db &quot;%d&quot;,0; db:define byte字节类型
+; char format[3]=&quot;%d&quot;;
+prompt db &quot;The result&quot;,0
+
+.code
+main: ; 标号
+mov eax, 0; 
+；eax:extended ax，eax是32位寄存器低16位为ax，高16位没名字
+
+mov ebx, 1；  这两句可以相当于是定义全局变量，eax，ebx为寄存器
+again: ;函数
+add eax, ebx; eax=0+1+2+3
+add ebx, 1  ; ebx=4
+cmp ebx, 100; cmp:compare
+jbe again   ; jbe:jump if below or equal
+invoke wsprintf,offset result,offset format,eax
+invoke MessageBox,0,offset result,offset prompt,0
+ret
+end main; 指定程序的起始执行点
+ ; end后面的标号决定了程序刚开始
+ ; 运行时的eip的值。</code></pre><p><code>include include\***.inc</code>类似与C中引入库函数，在实现输入输出功能<br><code>.data</code>为汇编代码的数据段，<code>.code</code>为代码段，变量均在数据段定义。<br>在代码段中，<code>main:</code>为函数开头，类似于C中<code>main():</code>，但是存在较大差异，<code>main:</code>只是一种标号，可以将其改名为任何形式，但是其后必须存在<code>:</code><br><code>invoke</code>相当于是宏定义来调用函数，从后往前将参数输入进函数<br><code>wsprintf</code>为函数，后面三个为所需参数，意为：将eax的值以format的形式输入进数组result中，即  </p>
+<pre><code>wsprintf(result,format,eax)；相当于C中这种形式
+转化为汇编语言
+push eax
+push offset format
+push offset result
+call wsprintf
+add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code></pre><p>同理，  </p>
+<pre><code>invoke MessageBox,0,offset result,offset prompt,0</code></pre><p>输入MessageBox所需的参数，最后的0 ，为弹出窗口的格式，即最简单的格式:只有一个“OK”按钮，prompt为弹窗的名称，result需要显示的字符串，最前面的数字为父弹窗的所属关系，0为不依靠任何窗口，即独立。<code>offset</code>为取址，即<code>&amp;</code>  </p>
+<h3 id="2、编译与调试"><a href="#2、编译与调试" class="headerlink" title="2、编译与调试"></a>2、编译与调试</h3><p>对与32位windows系统，需要先打开qeditor，后打开所要编译文件，project-&gt;build all，弹出生成.exe文件即可，可在相应文件夹打开或者project-&gt;run program打开生成程序。<br>32位的windows进行调试，需要将生成的.exe文件，拖入Ollydug中，在OD中打开后，F2设置断点，F8单步进行，F7进入函数，双击汇编代码或者机器语言可将其修改，但是本次修改只能在本次进行中保存。  </p>
+<h2 id="具体指令"><a href="#具体指令" class="headerlink" title="具体指令"></a>具体指令</h2><h3 id="add-sub与add相同）"><a href="#add-sub与add相同）" class="headerlink" title="add (sub与add相同）"></a>add (sub与add相同）</h3><p><strong>add 加法操作符</strong>，可进行：  </p>
+<ul>
+<li><p>add 寄存器，寄存器如 add ax,bx  </p>
+</li>
+<li><p>add 寄存器，变量 如  add ax,ds:[1000h]  </p>
+</li>
+<li><p>add 寄存器，常数 如  add ax,1</p>
+</li>
+<li><p>add 变量，寄存器 如：add ds:[1000h],ax</p>
+</li>
+<li><p>add 变量，常数 如：add word ptr ds:[1000h] ,2<br><font color =red>ptr 相当于强制类型转换，类似的有 <code>byte ptr``dword ptr</code> <code>word ptr</code></font><br><font color =blue>add 变量，变量语法错误</font>：因为CPU不支持同时操作两个内存变量<br>想要实现变量和变量的加法，可以使用如下方式  </p>
+<p>  mov ax,x<br>  add y,ax<br>其效果等同于y+=x;<br>同时<br>  mov ax ,bh<br>语法错误，因为左右不等宽  </p>
+</li>
+</ul>
+<h3 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h3><ul>
+<li>and  和  add ax,bx 等同 ax=ax&amp;bx</li>
+<li>or 或 or ax,bx 等同 ax=ax|b</li>
+<li>xor 异或 xor ax,bx 等同 ax=ax^bx</li>
+<li>not 非 not ax 等同 ax=~ax</li>
+<li>shl 左移 shl ax,bx 等同 ax=ax&lt;&lt;bx </li>
+<li>shr  右移 shr ax,bx 等同 ax=ax&gt;&gt;bx</li>
+<li>rol循环左移 rol ax,1 等同 ax =_rol(ax,1)</li>
+<li>ror循环右移 ror等同 ax =_ror(ax,1)<br>  mov ah,101110110B<br>  rol ah,1;AH=0110 1101=6Dh<br>  mov ah,10110111B<br>  ror ah,1;AH=1101 1011=0DBh<br><font color=red>在编程时引用一个16进制常数时，若恰好是以字母开头，则不仅要加后缀h,还需要加前缀0</font>  <h3 id="位运算作用"><a href="#位运算作用" class="headerlink" title="位运算作用"></a>位运算作用</h3></li>
+</ul>
+<ol>
+<li>可使某些位变0<br>如： 1111 0000 用 0000 1111 and 变为 0000 0000  </li>
+<li>用or使某些位变1  </li>
+<li>用xor反转某些位<br><font color=red>在数据段之前，加入<code>.386</code>,data segment，code segment后加入use 16可使用32位寄存器。</font></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>amb1t10n</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>This is my world.</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/28/wireshark-%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">wireshark-抓包实验报告</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/01/page/">Note of Discrete Mathematics and Its Applications</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© amb1t10n | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+    <script src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js"></script>
+</body>
+</html>
