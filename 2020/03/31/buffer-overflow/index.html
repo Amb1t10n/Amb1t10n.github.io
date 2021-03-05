@@ -18,12 +18,12 @@
   
   
   <title>buffer overflow | Amb1t10n&#39;s blog</title>
-  <meta name="description" content="Buffer overflow实验报告姓名:张喜瑜                                 学号：3190104667                        班级：图灵1901   【实验环境】 Ubuntu 18.04 64bit LTS版本  从学在浙大下载得到32位可执行文件 hw  执行sudo sysctl -w kernel.randomize_va_s">
+  <meta name="description" content="Buffer overflow实验报告 姓名:张喜瑜                                 学号：3190104667                        班级：图灵1901   【实验环境】   Ubuntu 18.04 64bit LTS版本   从学在浙大下载得到32位可执行文件 hw   执行sudo sysctl -w kernel.randomiz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="buffer overflow">
 <meta property="og:url" content="http://amb1t10n.github.io/2020/03/31/buffer-overflow/index.html">
 <meta property="og:site_name" content="amb1t10n&#39;s blog">
-<meta property="og:description" content="Buffer overflow实验报告姓名:张喜瑜                                 学号：3190104667                        班级：图灵1901   【实验环境】 Ubuntu 18.04 64bit LTS版本  从学在浙大下载得到32位可执行文件 hw  执行sudo sysctl -w kernel.randomize_va_s">
+<meta property="og:description" content="Buffer overflow实验报告 姓名:张喜瑜                                 学号：3190104667                        班级：图灵1901   【实验环境】   Ubuntu 18.04 64bit LTS版本   从学在浙大下载得到32位可执行文件 hw   执行sudo sysctl -w kernel.randomiz">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://amb1t10n.github.io/home/ambition/Pictures/2020-03-31%2018-06-33%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
 <meta property="og:image" content="http://amb1t10n.github.io/home/ambition/Pictures/2020-03-31%2019-03-02%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%20-%201.png">
@@ -388,35 +388,45 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="Buffer-overflow实验报告"><a href="#Buffer-overflow实验报告" class="headerlink" title="Buffer overflow实验报告"></a><center><strong>Buffer overflow实验报告</strong></center></h1><center><b>姓名</b>:张喜瑜                                 <b>学号</b>：3190104667                        <b>班级</b>：图灵1901</center> 
-
-<h3 id="【实验环境】"><a href="#【实验环境】" class="headerlink" title="【实验环境】"></a><strong>【实验环境】</strong></h3><ol>
-<li><p>Ubuntu 18.04 64bit LTS版本</p>
-</li>
-<li><p>从学在浙大下载得到32位可执行文件 hw</p>
-</li>
-<li><p>执行<code>sudo sysctl -w kernel.randomize_va_space=0</code>关闭ASLR</p>
-</li>
-</ol>
-<h3 id="【实验目的】"><a href="#【实验目的】" class="headerlink" title="【实验目的】"></a><strong>【实验目的】</strong></h3><ol>
-<li><p>了解buffer overflow原理</p>
-</li>
-<li><p>利用buffer overflow改变分支，进行输出  </p>
-</li>
-</ol>
-<h3 id="【实验步骤】"><a href="#【实验步骤】" class="headerlink" title="【实验步骤】"></a>【实验步骤】</h3><p>一、获得变量地址</p>
+        <h1 id="centerbuffer-overflow实验报告center"><a class="markdownIt-Anchor" href="#centerbuffer-overflow实验报告center"></a> <center><strong>Buffer overflow实验报告</strong></center></h1>
+<center><b>姓名</b>:张喜瑜                                 <b>学号</b>：3190104667                        <b>班级</b>：图灵1901</center> 
+<h3 id="实验环境"><a class="markdownIt-Anchor" href="#实验环境"></a> <strong>【实验环境】</strong></h3>
 <ol>
-<li><p>打开终端，进入hw所在文件夹</p>
+<li>
+<p>Ubuntu 18.04 64bit LTS版本</p>
 </li>
-<li><p>在终端输入，<code>objdump -d hw &gt; hw.asm</code>，生成Linux 32位汇编代码</p>
+<li>
+<p>从学在浙大下载得到32位可执行文件 hw</p>
 </li>
-<li><p>打开hw.asm，并寻找main函数中定义变量部分</p>
+<li>
+<p>执行<code>sudo sysctl -w kernel.randomize_va_space=0</code>关闭ASLR</p>
 </li>
 </ol>
-   <img src="/home/ambition/Pictures/2020-03-31 18-06-33 的屏幕截图.png" alt="2020-03-31 18-06-33 的屏幕截图" style="zoom:67%;" />
-
-<ol start="4">
-<li>得到isRoot地址为<code>-0xc(%ebp)</code></li>
+<h3 id="实验目的"><a class="markdownIt-Anchor" href="#实验目的"></a> <strong>【实验目的】</strong></h3>
+<ol>
+<li>
+<p>了解buffer overflow原理</p>
+</li>
+<li>
+<p>利用buffer overflow改变分支，进行输出</p>
+</li>
+</ol>
+<h3 id="实验步骤"><a class="markdownIt-Anchor" href="#实验步骤"></a> 【实验步骤】</h3>
+<p>一、获得变量地址</p>
+<ol>
+<li>
+<p>打开终端，进入hw所在文件夹</p>
+</li>
+<li>
+<p>在终端输入，<code>objdump -d hw &gt; hw.asm</code>，生成Linux 32位汇编代码</p>
+</li>
+<li>
+<p>打开hw.asm，并寻找main函数中定义变量部分</p>
+<img src="/home/ambition/Pictures/2020-03-31 18-06-33 的屏幕截图.png" alt="2020-03-31 18-06-33 的屏幕截图" style="zoom:67%;" />
+</li>
+<li>
+<p>得到isRoot地址为<code>-0xc(%ebp)</code></p>
+</li>
 </ol>
 <p>二、使用gdb获得ebp及buffer地址</p>
 <ol>
@@ -427,7 +437,6 @@
 <li>输入c，继续。得到buffer地址，为0xffffce80</li>
 </ol>
 <img src="/home/ambition/Pictures/2020-03-31 19-03-02 的屏幕截图 - 1.png" alt="2020-03-31 19-03-02 的屏幕截图 - 1" style="zoom:67%;" />
-
 <p>三、计算要overwrite的变量和buffer之间的偏移量</p>
 <ol>
 <li>isRoot地址为<code>-0xc(%ebp)</code>，即<code>0xffffce98-0xc==0x8c</code></li>
@@ -438,36 +447,37 @@
 <li>Inter80$\times$86芯片为小端格式，即数据的高字节保存在内存的高地址中，即16进制的41 42 43 44在内存中从高到低，由于写入时为低位到高位，故依次输入44 43 42 41。</li>
 <li>由于直接输入44 43 42 41会导致读取8个字节，可输入0x44 ASCII码对应的字符，即<code>D</code>。</li>
 <li>输入任意12个字符，再输入<code>DCBA</code></li>
-<li>得到输出：<code>pwded!</code><img src="/home/ambition/Pictures/2020-03-31 19-20-51 的屏幕截图.png" alt="2020-03-31 19-20-51 的屏幕截图"  />
-
-</li>
+<li>得到输出：<code>pwded!</code><br />
+<img src="/home/ambition/Pictures/2020-03-31 19-20-51 的屏幕截图.png" alt="2020-03-31 19-20-51 的屏幕截图"  /></li>
 </ol>
-<h3 id="【实验结果】"><a href="#【实验结果】" class="headerlink" title="【实验结果】"></a><strong>【实验结果】</strong></h3><ol>
-<li><p>如何获得isRoot地址</p>
+<h3 id="实验结果"><a class="markdownIt-Anchor" href="#实验结果"></a> <strong>【实验结果】</strong></h3>
+<ol>
+<li>
+<p>如何获得isRoot地址</p>
 <p>由于对汇编语言不太熟悉，在获得ebq地址时，认为ebq地址为isRoot地址，获得偏移地址为0x18-4，输出错误。仔细阅读汇编语言后，发现<code>movl $0x0,-0xc(%ebp)</code>这条指令，猜测-0xc(%ebp)为isRoot地址。</p>
 <p>后将源码改为</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		short <span class="keyword">int</span> isRoot = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">char</span> <span class="built_in">buffer</span>[<span class="number">12</span>];	</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"the address of buffer is %p \n"</span>, <span class="built_in">buffer</span>);</span><br><span class="line">		gets(<span class="built_in">buffer</span>);</span><br><span class="line">		<span class="keyword">if</span> (isRoot ==<span class="number">0x41424344</span>) &#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"pwned! \n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>再反汇编得到</p>
 <img src="/home/ambition/Pictures/2020-03-31 19-35-27 的屏幕截图.png"  />
-
 <p>可以看到</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movl $0x0,-0xc(%ebp) ;变为</span><br><span class="line">；movw $0x0,-0a(%ebp)</span><br></pre></td></tr></table></figure>
-
 <p>由此确认<code>-0xc(%ebp)</code>为isRoot地址。</p>
 </li>
-<li><p>如何了解0x41424344在内存中储存位置</p>
+<li>
+<p>如何了解0x41424344在内存中储存位置</p>
 <p>通过网上搜索相关内容，了解到数据的高字节保存在内存的高地址中。</p>
 <p>并且通过下列代码证实</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a=<span class="number">0x41424344</span>;</span><br><span class="line">	<span class="keyword">char</span> *p=&amp;a;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%x "</span>,p[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//得到输出为44 43 42 41</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>输入16进制44 43 42 41</p>
+<li>
+<p>输入16进制44 43 42 41</p>
 <ul>
-<li><p>实验时通过输入<code>DCBA</code>的方式进行</p>
+<li>
+<p>实验时通过输入<code>DCBA</code>的方式进行</p>
 </li>
-<li><p>通过<code>|</code>管道链接,实现输入</p>
+<li>
+<p>通过<code>|</code>管道链接,实现输入</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	  	<span class="built_in">printf</span>(<span class="string">"\x44\x43\x42\x41"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 </li>

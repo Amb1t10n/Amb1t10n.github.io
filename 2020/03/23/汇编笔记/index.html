@@ -18,12 +18,12 @@
   
   
   <title>汇编笔记 | Amb1t10n&#39;s blog</title>
-  <meta name="description" content="汇编笔记汇编代码初见及其编译及调试sum.asm​    .386​    .model flat, stdcall​    option casemap :none​     include include\windows.inc include include\kernel32.inc include include\user32.inc  includelib lib\kernel32.li">
+  <meta name="description" content="汇编笔记  汇编代码初见及其编译及调试  sum.asm ​    .386 ​    .model flat, stdcall ​    option casemap :none ​ include include\windows.inc include include\kernel32.inc include include\user32.inc  includelib lib\kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编笔记">
 <meta property="og:url" content="http://amb1t10n.github.io/2020/03/23/%E6%B1%87%E7%BC%96%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="amb1t10n&#39;s blog">
-<meta property="og:description" content="汇编笔记汇编代码初见及其编译及调试sum.asm​    .386​    .model flat, stdcall​    option casemap :none​     include include\windows.inc include include\kernel32.inc include include\user32.inc  includelib lib\kernel32.li">
+<meta property="og:description" content="汇编笔记  汇编代码初见及其编译及调试  sum.asm ​    .386 ​    .model flat, stdcall ​    option casemap :none ​ include include\windows.inc include include\kernel32.inc include include\user32.inc  includelib lib\kernel">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/04/01/E7C1TJAqIfRb49c.png">
 <meta property="article:published_time" content="2020-03-23T04:59:54.555Z">
@@ -379,7 +379,13 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="汇编笔记"><a href="#汇编笔记" class="headerlink" title="汇编笔记"></a>汇编笔记</h1><h2 id="汇编代码初见及其编译及调试"><a href="#汇编代码初见及其编译及调试" class="headerlink" title="汇编代码初见及其编译及调试"></a>汇编代码初见及其编译及调试</h2><h3 id="sum-asm"><a href="#sum-asm" class="headerlink" title="sum.asm"></a>sum.asm</h3><p>​    .386<br>​    .model flat, stdcall<br>​    option casemap :none<br>​    </p>
+        <h1 id="汇编笔记"><a class="markdownIt-Anchor" href="#汇编笔记"></a> 汇编笔记</h1>
+<h2 id="汇编代码初见及其编译及调试"><a class="markdownIt-Anchor" href="#汇编代码初见及其编译及调试"></a> 汇编代码初见及其编译及调试</h2>
+<h3 id="sumasm"><a class="markdownIt-Anchor" href="#sumasm"></a> sum.asm</h3>
+<p>​    .386<br />
+​    .model flat, stdcall<br />
+​    option casemap :none<br />
+​</p>
 <pre><code>include include\windows.inc
 include include\kernel32.inc
 include include\user32.inc
@@ -410,69 +416,104 @@ invoke MessageBox,0,offset result,offset prompt,0
 ret
 end main; 指定程序的起始执行点
  ; end后面的标号决定了程序刚开始
- ; 运行时的eip的值。</code></pre><p><code>include include\***.inc</code>类似与C中引入库函数，在实现输入输出功能<br><code>.data</code>为汇编代码的数据段，<code>.code</code>为代码段，变量均在数据段定义。<br>在代码段中，<code>main:</code>为函数开头，类似于C中<code>main():</code>，但是存在较大差异，<code>main:</code>只是一种标号，可以将其改名为任何形式，但是其后必须存在<code>:</code><br><code>invoke</code>相当于是宏定义来调用函数，从后往前将参数输入进函数<br><code>wsprintf</code>为函数，后面三个为所需参数，意为：将eax的值以format的形式输入进数组result中，即  </p>
+ ; 运行时的eip的值。
+</code></pre>
+<p><code>include include\***.inc</code>类似与C中引入库函数，在实现输入输出功能<br />
+<code>.data</code>为汇编代码的数据段，<code>.code</code>为代码段，变量均在数据段定义。<br />
+在代码段中，<code>main:</code>为函数开头，类似于C中<code>main():</code>，但是存在较大差异，<code>main:</code>只是一种标号，可以将其改名为任何形式，但是其后必须存在<code>:</code><br />
+<code>invoke</code>相当于是宏定义来调用函数，从后往前将参数输入进函数<br />
+<code>wsprintf</code>为函数，后面三个为所需参数，意为：将eax的值以format的形式输入进数组result中，即</p>
 <pre><code>wsprintf(result,format,eax)；相当于C中这种形式
 转化为汇编语言
 push eax
 push offset format
 push offset result
 call wsprintf
-add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code></pre><p>同理，  </p>
-<pre><code>invoke MessageBox,0,offset result,offset prompt,0</code></pre><p>输入MessageBox所需的参数，最后的0 ，为弹出窗口的格式，即最简单的格式:只有一个“OK”按钮，prompt为弹窗的名称，result需要显示的字符串，最前面的数字为父弹窗的所属关系，0为不依靠任何窗口，即独立。<code>offset</code>为取址，即<code>&amp;</code>  </p>
-<h3 id="编译与调试"><a href="#编译与调试" class="headerlink" title="编译与调试"></a>编译与调试</h3><p>对与32位windows系统，需要先打开qeditor，后打开所要编译文件，project-&gt;build all，弹出生成.exe文件即可，可在相应文件夹打开或者project-&gt;run program打开生成程序。<br>32位的windows进行调试，需要将生成的.exe文件，拖入Ollydug中，在OD中打开后，F2设置断点，F8单步进行，F7进入函数，双击汇编代码或者机器语言可将其修改，但是本次修改只能在本次进行中保存。  </p>
-<h3 id="浮点数的二进制表示"><a href="#浮点数的二进制表示" class="headerlink" title="浮点数的二进制表示"></a>浮点数的二进制表示</h3><p>IEEE754规则</p>
-<p><img src="https://i.loli.net/2020/04/01/E7C1TJAqIfRb49c.png" alt="image-20200401162958232"></p>
+add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push
+</code></pre>
+<p>同理，</p>
+<pre><code>invoke MessageBox,0,offset result,offset prompt,0
+</code></pre>
+<p>输入MessageBox所需的参数，最后的0 ，为弹出窗口的格式，即最简单的格式:只有一个“OK”按钮，prompt为弹窗的名称，result需要显示的字符串，最前面的数字为父弹窗的所属关系，0为不依靠任何窗口，即独立。<code>offset</code>为取址，即<code>&amp;</code></p>
+<h3 id="编译与调试"><a class="markdownIt-Anchor" href="#编译与调试"></a> 编译与调试</h3>
+<p>对与32位windows系统，需要先打开qeditor，后打开所要编译文件，project-&gt;build all，弹出生成.exe文件即可，可在相应文件夹打开或者project-&gt;run program打开生成程序。<br />
+32位的windows进行调试，需要将生成的.exe文件，拖入Ollydug中，在OD中打开后，F2设置断点，F8单步进行，F7进入函数，双击汇编代码或者机器语言可将其修改，但是本次修改只能在本次进行中保存。</p>
+<h3 id="浮点数的二进制表示"><a class="markdownIt-Anchor" href="#浮点数的二进制表示"></a> 浮点数的二进制表示</h3>
+<p>IEEE754规则</p>
+<p><img src="https://i.loli.net/2020/04/01/E7C1TJAqIfRb49c.png" alt="image-20200401162958232" /></p>
 <ul>
-<li><p>第一位为符号位，1为负数，0为非负数</p>
+<li>
+<p>第一位为符号位，1为负数，0为非负数</p>
 </li>
-<li><p>后八位为偏置指数，得出结果-127获得实际指数</p>
+<li>
+<p>后八位为偏置指数，得出结果-127获得实际指数</p>
 </li>
-<li><p>再将后面23位抄下，在最左边加上 1.</p>
+<li>
+<p>再将后面23位抄下，在最左边加上 1.</p>
 <p>即1.1111110 11000000 00000000</p>
 </li>
-<li><p>再将小数点向右移 实际指数 位，即6位</p>
+<li>
+<p>再将小数点向右移 实际指数 位，即6位</p>
 </li>
-<li><p>小数点前为整数，小数点后为小数位</p>
+<li>
+<p>小数点前为整数，小数点后为小数位</p>
 </li>
 </ul>
-<h2 id="加法，位运算"><a href="#加法，位运算" class="headerlink" title="加法，位运算"></a>加法，位运算</h2><h3 id="add-sub与add相同）"><a href="#add-sub与add相同）" class="headerlink" title="add (sub与add相同）"></a>add (sub与add相同）</h3><p><strong>add 加法操作符</strong>，可进行：  </p>
+<h2 id="加法位运算"><a class="markdownIt-Anchor" href="#加法位运算"></a> 加法，位运算</h2>
+<h3 id="add-sub与add相同"><a class="markdownIt-Anchor" href="#add-sub与add相同"></a> add (sub与add相同）</h3>
+<p><strong>add 加法操作符</strong>，可进行：</p>
 <ul>
-<li><p>add 寄存器，寄存器如 add ax,bx  </p>
+<li>
+<p>add 寄存器，寄存器如 add ax,bx</p>
 </li>
-<li><p>add 寄存器，变量 如  add ax,ds:[1000h]  </p>
+<li>
+<p>add 寄存器，变量 如  add ax,ds:[1000h]</p>
 </li>
-<li><p>add 寄存器，常数 如  add ax,1</p>
+<li>
+<p>add 寄存器，常数 如  add ax,1</p>
 </li>
-<li><p>add 变量，寄存器 如：add ds:[1000h],ax</p>
+<li>
+<p>add 变量，寄存器 如：add ds:[1000h],ax</p>
 </li>
-<li><p>add 变量，常数 如：add word ptr ds:[1000h] ,2<br><font color =red>ptr 相当于强制类型转换，类似的有 <code>byte ptr``dword ptr</code> <code>word ptr</code></font><br><font color =blue>add 变量，变量语法错误</font>：因为CPU不支持同时操作两个内存变量<br>想要实现变量和变量的加法，可以使用如下方式  </p>
-<p>  mov ax,x<br>  add y,ax<br>其效果等同于y+=x;<br>同时<br>  mov ax ,bh<br>语法错误，因为左右不等宽  </p>
-<p>设ds=1000h,执行<code>add word ptr ds:[0],2</code></p>
+<li>
+<p>add 变量，常数 如：add word ptr ds:[1000h] ,2<br />
+<font color =red>ptr 相当于强制类型转换，类似的有 <code>byte ptr``dword ptr</code> <code>word ptr</code></font><br />
+<font color =blue>add 变量，变量语法错误</font>：因为CPU不支持同时操作两个内存变量<br />
+想要实现变量和变量的加法，可以使用如下方式</p>
+<p>mov ax,x<br />
+add y,ax<br />
+其效果等同于y+=x;<br />
+同时<br />
+mov ax ,bh<br />
+语法错误，因为左右不等宽</p>
+<p>设ds=1000h,执行<code>add word ptr ds:[0],2</code></p>
 <table>
 <thead>
 <tr>
-<th align="center">地址</th>
-<th align="center">值</th>
+<th style="text-align:center">地址</th>
+<th style="text-align:center">值</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1000:0</td>
-<td align="center">0FEh</td>
+<tbody>
+<tr>
+<td style="text-align:center">1000:0</td>
+<td style="text-align:center">0FEh</td>
 </tr>
 <tr>
-<td align="center">1000:1</td>
-<td align="center">0FFh</td>
+<td style="text-align:center">1000:1</td>
+<td style="text-align:center">0FFh</td>
 </tr>
 <tr>
-<td align="center">1000:2</td>
-<td align="center">0FFh</td>
+<td style="text-align:center">1000:2</td>
+<td style="text-align:center">0FFh</td>
 </tr>
 <tr>
-<td align="center">1000:3</td>
-<td align="center">01h</td>
+<td style="text-align:center">1000:3</td>
+<td style="text-align:center">01h</td>
 </tr>
-</tbody></table>
-<p><code>word</code>为两字节，则<code>word ptr ds:[0]==FFFE</code>,加2后，变为</p>
+</tbody>
+</table>
+<p><code>word</code>为两字节，则<code>word ptr ds:[0]==FFFE</code>,加2后，变为</p>
 <table>
 <thead>
 <tr>
@@ -480,7 +521,8 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <th>值</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1000:0</td>
 <td>00h</td>
 </tr>
@@ -488,7 +530,8 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <td>1000:1</td>
 <td>00h</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>对于<code>byte ptr</code>则变为</p>
 <table>
 <thead>
@@ -497,7 +540,8 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <th>值</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1000:0</td>
 <td>00h</td>
 </tr>
@@ -505,43 +549,66 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <td>1000:1</td>
 <td>0FFh</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>强制类型转换之后，限定了ds:[0]所占据的比特。</p>
 </li>
 </ul>
-<h3 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h3><ul>
-<li><p>Test </p>
+<h3 id="逻辑运算"><a class="markdownIt-Anchor" href="#逻辑运算"></a> 逻辑运算</h3>
+<ul>
+<li>
+<p>Test</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,9234h</span><br><span class="line">test ax,8000h;内部做and但不将结果保存在ax中</span><br><span class="line">jnz mab_is_one;most significant bit 最高位，test和and的关系相当于从cmp和sub的关系</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>and  和  add ax,bx 等同 ax=ax&amp;bx</p>
+<li>
+<p>and  和  add ax,bx 等同 ax=ax&amp;bx</p>
 </li>
-<li><p>or 或 or ax,bx 等同 ax=ax|b</p>
+<li>
+<p>or 或 or ax,bx 等同 ax=ax|b</p>
 </li>
-<li><p>xor 异或 xor ax,bx 等同 ax=ax^bx</p>
+<li>
+<p>xor 异或 xor ax,bx 等同 ax=ax^bx</p>
 </li>
-<li><p>not 非 not ax 等同 ax=~ax</p>
+<li>
+<p>not 非 not ax 等同 ax=~ax</p>
 </li>
-<li><p>shl 左移 shl ax,bx 等同 ax=ax&lt;&lt;bx </p>
+<li>
+<p>shl 左移 shl ax,bx 等同 ax=ax&lt;&lt;bx</p>
 </li>
-<li><p>shr  右移 shr ax,bx 等同 ax=ax&gt;&gt;bx</p>
+<li>
+<p>shr  右移 shr ax,bx 等同 ax=ax&gt;&gt;bx</p>
 </li>
-<li><p>rol循环左移 rol ax,1 等同 ax =_rol(ax,1)</p>
+<li>
+<p>rol循环左移 rol ax,1 等同 ax =_rol(ax,1)</p>
 </li>
-<li><p>ror循环右移 ror等同 ax =_ror(ax,1)<br>  mov ah,101110110B<br>  rol ah,1;AH=0110 1101=6Dh<br>  mov ah,10110111B<br>  ror ah,1;AH=1101 1011=0DBh<br><font color=red>在编程时引用一个16进制常数时，若恰好是以字母开头，则不仅要加后缀h,还需要加前缀0</font>  </p>
+<li>
+<p>ror循环右移 ror等同 ax =_ror(ax,1)<br />
+mov ah,101110110B<br />
+rol ah,1;AH=0110 1101=6Dh<br />
+mov ah,10110111B<br />
+ror ah,1;AH=1101 1011=0DBh<br />
+<font color=red>在编程时引用一个16进制常数时，若恰好是以字母开头，则不仅要加后缀h,还需要加前缀0</font></p>
 </li>
-<li><p>rcl,rcr带进位左移右移</p>
+<li>
+<p>rcl,rcr带进位左移右移</p>
 </li>
-<li><p>sal==shl 算术左移等于逻辑左移</p>
+<li>
+<p>sal==shl 算术左移等于逻辑左移</p>
 </li>
-<li><p>sar！=shr sar对负数右移时左边要补1：针对符号数</p>
-<h3 id="位运算作用"><a href="#位运算作用" class="headerlink" title="位运算作用"></a>位运算作用</h3></li>
+<li>
+<p>sar！=shr sar对负数右移时左边要补1：针对符号数</p>
+</li>
 </ul>
+<h3 id="位运算作用"><a class="markdownIt-Anchor" href="#位运算作用"></a> 位运算作用</h3>
 <ol>
-<li>可使某些位变0<br>如： 1111 0000 用 0000 1111 and 变为 0000 0000  </li>
-<li>用or使某些位变1  </li>
-<li>用xor反转某些位<br><font color=red>在数据段之前，加入<code>.386</code>,data segment，code segment后加入use 16可使用32位寄存器。</font></li>
+<li>可使某些位变0<br />
+如： 1111 0000 用 0000 1111 and 变为 0000 0000</li>
+<li>用or使某些位变1</li>
+<li>用xor反转某些位<br />
+<font color=red>在数据段之前，加入<code>.386</code>,data segment，code segment后加入use 16可使用32位寄存器。</font></li>
 <li>利用循环左移转换进制</li>
-<li>判断是否为0<ul>
+<li>判断是否为0
+<ul>
 <li>text cl,cl</li>
 <li>or cl,cl</li>
 <li>and cl,cl</li>
@@ -551,78 +618,89 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 </ul>
 </li>
 </ol>
-<h2 id="段地址"><a href="#段地址" class="headerlink" title="段地址"></a>段地址</h2><p><strong>物理地址</strong>:用一个整数表示的地址称为物理地址，例如：<code>12398h</code></p>
+<h2 id="段地址"><a class="markdownIt-Anchor" href="#段地址"></a> 段地址</h2>
+<p><strong>物理地址</strong>:用一个整数表示的地址称为物理地址，例如：<code>12398h</code></p>
 <p>假定在程序中要引用地址12398h指向的字节</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov al,[12398h] ;可以理解为al&#x3D;*(char *)0x12398</span><br></pre></td></tr></table></figure>
-
 <p>在8086CPU中，寄存器均为16位，如：ax,bx,cx,dx,sp,bp,si,di,FL,IP,cs,ds,es,ss</p>
 <p>其中<font color=red>bx,bp,si,di</font>用来表示地址。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov bx,12398h ;语法错误，12398h超过16字节</span><br><span class="line">mov al,[bx]</span><br></pre></td></tr></table></figure>
-
-<p><code>mov al,[12398h]</code>尽管用常数地址来引用，但是语法错误，<code>[]</code>中值必须为16位。</p>
+<p><code>mov al,[12398h]</code>尽管用常数地址来引用，但是语法错误，<code>[]</code>中值必须为16位。</p>
 <p>位于同一个段，物理地址的段首地址相同。<font color=red>段首地址:偏移地址</font>，形如此类称为<strong>逻辑地址</strong>。</p>
-<p>对于<code>mov al,[12398h]</code>可改为如下代码：</p>
+<p>对于<code>mov al,[12398h]</code>可改为如下代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov dx,1000h</span><br><span class="line">mov ds,dx</span><br><span class="line">mov al,ds:[2398h];但是mov al,1000h:[2398h]错误</span><br></pre></td></tr></table></figure>
-
-<p>对于<code>mov bx,12398h</code>可改为</p>
+<p>对于<code>mov bx,12398h</code>可改为</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov dx,1000h</span><br><span class="line">mov es,dx</span><br><span class="line">mov bx,2398h</span><br><span class="line">mov al,es:[bx]</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>段起始地址的二进制低四位，即16进制的个位必须=0</p>
+<li>
+<p>段起始地址的二进制低四位，即16进制的个位必须=0</p>
 </li>
-<li><p>段的最大长度位10000h字节</p>
+<li>
+<p>段的最大长度位10000h字节</p>
 </li>
-<li><p>一个物理地址可以表示成多个逻辑地址，例如：12398h=1234:0058=1235:0048</p>
+<li>
+<p>一个物理地址可以表示成多个逻辑地址，例如：12398h=1234:0058=1235:0048</p>
 </li>
-<li><p>段地址的1相当于偏移地址的10h，+1，偏移地址-10h，-1，偏移地址+10h</p>
+<li>
+<p>段地址的1相当于偏移地址的10h，+1，偏移地址-10h，-1，偏移地址+10h</p>
 </li>
-<li><p>程序中引用某个变量是，该变量的段地址不能用常数表示，必须用段寄存器如：cs，ds，es，ss的其中之一。</p>
+<li>
+<p>程序中引用某个变量是，该变量的段地址不能用常数表示，必须用段寄存器如：cs，ds，es，ss的其中之一。</p>
 </li>
 </ul>
 <p>段地址:偏移地址可以表示20位的物理地址。在8086系统中，地址线只有20条，即最多只能寻址1M的内存空间，所以dos系统只能访问1M内存空间。</p>
 <p>将1000h:0000起长度为128k的内存全部填为0：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mov ax,1000h</span><br><span class="line">mov dx,2;块数</span><br><span class="line">next_block:</span><br><span class="line">mov ds,ax</span><br><span class="line">mov bx,0</span><br><span class="line">mov cx,0</span><br><span class="line">next_byte:</span><br><span class="line">mov byte ptr ds:[bx],0</span><br><span class="line">add bx,1</span><br><span class="line">sub cx,1;0-1&#x3D;&#x3D;FFFF!&#x3D;0,ffff 64k</span><br><span class="line">jnz next_byte</span><br><span class="line">mov ax,ds</span><br><span class="line">add ax,1000h</span><br><span class="line">sub dx,1</span><br><span class="line">jnz next_block</span><br></pre></td></tr></table></figure>
-
 <p>16位的CPU工作在实模式(real mode)，32位工作在保护模式(protected mode)下。在实模式下，用户程序具有跟操作系统一样的权限，可以执行任何指令；保护模式下，用户程序的权限低于操作系统，有些特权指令无法执行。</p>
-<h3 id="间接寻址"><a href="#间接寻址" class="headerlink" title="间接寻址"></a>间接寻址</h3><p>可以用寄存器、寄存器+常数表示变量的偏移地址如[bx],[si+2],[bx+si+2],[bp+1]</p>
+<h3 id="间接寻址"><a class="markdownIt-Anchor" href="#间接寻址"></a> 间接寻址</h3>
+<p>可以用寄存器、寄存器+常数表示变量的偏移地址如[bx],[si+2],[bx+si+2],[bp+1]</p>
 <ul>
 <li>常数可以是负数</li>
 <li>两个寄存器只能相加，不能相减</li>
 <li>两个寄存器只能从b开头选一个，i结尾选一个。</li>
 </ul>
-<h3 id="32位间接寻址方式"><a href="#32位间接寻址方式" class="headerlink" title="32位间接寻址方式"></a>32位间接寻址方式</h3><p>[寄存器+寄存器*n+常数]其中n=2、4、8.</p>
-<p>例如： </p>
+<h3 id="32位间接寻址方式"><a class="markdownIt-Anchor" href="#32位间接寻址方式"></a> 32位间接寻址方式</h3>
+<p>[寄存器+寄存器*n+常数]其中n=2、4、8.</p>
+<p>例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov eax,[ebx+esi*4];设ebx位数组a的首地址，下标i用esi表示，则上述语句相当于C的eax&#x3D;a[i];</span><br><span class="line">long a[4]&#x3D;&#123;1,2,3,4&#125;,y;</span><br><span class="line">y&#x3D;a[2];</span><br><span class="line">mov y,[ebx+esi*4];4&#x3D;sizeof(long int)</span><br><span class="line">mov eax,[ebx+esi*4+6]</span><br></pre></td></tr></table></figure>
-
 <p>32位寻址方式中，对[]中的两个寄存器几乎不加限制</p>
 <p>ebx,ebi.esi,edi,eax,ecx,edx,esp,任意两个寄存器可以相加，甚至相同。</p>
-<h2 id="ptr"><a href="#ptr" class="headerlink" title="ptr"></a>ptr</h2><p>修饰变量：</p>
+<h2 id="ptr"><a class="markdownIt-Anchor" href="#ptr"></a> ptr</h2>
+<p>修饰变量：</p>
 <ul>
-<li><p>byte ptr==char *     1字节</p>
+<li>
+<p>byte ptr==char *     1字节</p>
 </li>
-<li><p>word ptr==short int *   2字节</p>
+<li>
+<p>word ptr==short int *   2字节</p>
 </li>
-<li><p>dword ptr == long int*</p>
+<li>
+<p>dword ptr == long int*</p>
 </li>
 </ul>
 <p>修饰标号：</p>
 <ul>
-<li><p>near ptr 近，当前指令与目标地址在同一段</p>
+<li>
+<p>near ptr 近，当前指令与目标地址在同一段</p>
 </li>
-<li><p>far ptr 远</p>
+<li>
+<p>far ptr 远</p>
 <p>near ptr 和far ptr 前面通常是jmp或call</p>
 <p>jmp far ptr away 表示远跳，jmp与code不在同一段内。</p>
 </li>
 </ul>
 <p>当源操作数为常数，目标操作数为变量时，则变量必须加上类型修饰。</p>
-<h3 id="assume-作用"><a href="#assume-作用" class="headerlink" title="assume 作用"></a>assume 作用</h3><p>帮助编译器建立段寄存器与段得关联，当源程序中引用了某个段内的变量时，编译器会在编译出来的机器码中把变量的段地址替换成段内关联的寄存器。</p>
-<h3 id="图形模式编程"><a href="#图形模式编程" class="headerlink" title="图形模式编程"></a>图形模式编程</h3><p>写入B800段内的显卡内存来控制屏幕输出时文本模式编程</p>
+<h3 id="assume-作用"><a class="markdownIt-Anchor" href="#assume-作用"></a> assume 作用</h3>
+<p>帮助编译器建立段寄存器与段得关联，当源程序中引用了某个段内的变量时，编译器会在编译出来的机器码中把变量的段地址替换成段内关联的寄存器。</p>
+<h3 id="图形模式编程"><a class="markdownIt-Anchor" href="#图形模式编程"></a> 图形模式编程</h3>
+<p>写入B800段内的显卡内存来控制屏幕输出时文本模式编程</p>
 <p>内存映射（mapping）：例如把显卡内存和RAM中的B800段建立对应关系</p>
 <p>A000段开始到F000均不是用户的内存空间，有部分内存时映射在显卡内存中，有部分内存映射在ROM中。</p>
 <p>POST（Power On Self Test）位于ROM中，映射到F000段中。</p>
 <p>DOS中留给用户的内存仅有0000:0000~9000:FFFF这块640K内存。</p>
 <ol>
-<li><p>如何把显卡切换到图形模式（graphics mode）：调用int 10h中断</p>
+<li>
+<p>如何把显卡切换到图形模式（graphics mode）：调用int 10h中断</p>
 <p>要切换到分辨率320*200，颜色256色的图形模式：</p>
 <p>mov ah,0 ;其中AH=0表示子功能号为0</p>
 <p>mov al,13h;其中AL=13h代表图形模式编号</p>
@@ -631,9 +709,9 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>int 10h 是BIOS（Basic Input Output System）的一部分，其代码是主板的厂家写的。保存在ROM里面。</p>
 </li>
 </ol>
-<h3 id="ss-sp及堆栈段"><a href="#ss-sp及堆栈段" class="headerlink" title="ss:sp及堆栈段"></a>ss:sp及堆栈段</h3><p>堆栈段的定义及使用：</p>
+<h3 id="sssp及堆栈段"><a class="markdownIt-Anchor" href="#sssp及堆栈段"></a> ss:sp及堆栈段</h3>
+<p>堆栈段的定义及使用：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stk segment stack;段名无关紧要</span><br><span class="line">db 200h dup(&#39;S&#39;);定义无名数组</span><br><span class="line">			   ;或写成dw 100h dup(0)</span><br><span class="line">stk ends</span><br><span class="line">;堆栈空间是stk:0到stk:1FF</span><br><span class="line">;程序开始运行时，ss&#x3D;stk,sp&#x3D;1FF+1</span><br></pre></td></tr></table></figure>
-
 <p>程序开始运行时，ds=es=psp段址，其中psp表示程序端前缀，他位于程序首个段的前面，长度为100h字节。psp种存放了与当前exe有关的信息如psp:80h开始存放了exe的命令行参数。</p>
 <p>程序运行时，dos会把exe文件包含的机器码复制到内存中，并且手段前面会自动分配给一块长度为100h字节的内存给psp段。</p>
 <p>dos自动对段寄存器作赋值：ds=es=psp</p>
@@ -641,33 +719,36 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>再赋值cs:ip=代码段址：main的偏移地址</p>
 <p>如果源程序中没有定义堆栈段，dos会自动分配一个堆栈段给exe，其中ss=首段的段地址，sp=0</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push ax; sp &#x3D; sp -2&#x3D;FFFE</span><br><span class="line">pop ax;</span><br></pre></td></tr></table></figure>
-
-<h3 id="es"><a href="#es" class="headerlink" title="es"></a>es</h3><p>es:extra segment 附加段      与ds类似</p>
+<h3 id="es"><a class="markdownIt-Anchor" href="#es"></a> es</h3>
+<p>es:extra segment 附加段      与ds类似</p>
 <p>AX BX CX DX；计算；BX可以用来表示偏移地址</p>
 <p>SP BP SI DI;</p>
-<h3 id="FL-标志寄存器"><a href="#FL-标志寄存器" class="headerlink" title="FL 标志寄存器"></a>FL 标志寄存器</h3><p>FL共16位，但只用其中9位，包括6个状态标志和3个控制标志</p>
-<p>O D I T S Z A P C  </p>
+<h3 id="fl-标志寄存器"><a class="markdownIt-Anchor" href="#fl-标志寄存器"></a> FL 标志寄存器</h3>
+<p>FL共16位，但只用其中9位，包括6个状态标志和3个控制标志</p>
+<p>O D I T S Z A P C</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cmp cf,1;语法错误</span><br><span class="line">;可以用一下指令</span><br><span class="line">jc cf;进位则跳</span><br><span class="line">jnc cf</span><br><span class="line">add ah,0;ah&#x3D;ah+0+cf使用ah判断值</span><br></pre></td></tr></table></figure>
-
 <p>与cf相关的两条跳转指令：jc,jnc,clc,stc,cmc</p>
 <ul>
 <li>clc;使cf=0</li>
 <li>stc;使cf=1</li>
 <li>cmc;使cf相反</li>
 </ul>
-<h3 id="ZF-零标志"><a href="#ZF-零标志" class="headerlink" title="ZF 零标志"></a>ZF 零标志</h3><p>用于刚刚的计算是否为0，若为0，则ZF=1</p>
+<h3 id="zf-零标志"><a class="markdownIt-Anchor" href="#zf-零标志"></a> ZF 零标志</h3>
+<p>用于刚刚的计算是否为0，若为0，则ZF=1</p>
 <p>jz和jnz指令与ZF相关。跳转的依据为ZF是否为1.</p>
-<p>je==jz,jne==jnz</p>
+<p>je<mark>jz,jne</mark>jnz</p>
 <p>mov指令不干扰标志位</p>
-<h3 id="SF-标志符号"><a href="#SF-标志符号" class="headerlink" title="SF 标志符号"></a>SF 标志符号</h3><p>SF为结果最高位值，负数为1，非负数为0</p>
+<h3 id="sf-标志符号"><a class="markdownIt-Anchor" href="#sf-标志符号"></a> SF 标志符号</h3>
+<p>SF为结果最高位值，负数为1，非负数为0</p>
 <p>jns与js为跳转指令。</p>
-<h3 id="OF-溢出标志"><a href="#OF-溢出标志" class="headerlink" title="OF 溢出标志"></a>OF 溢出标志</h3><p>正正相加为负 或 负加负为正。</p>
+<h3 id="of-溢出标志"><a class="markdownIt-Anchor" href="#of-溢出标志"></a> OF 溢出标志</h3>
+<p>正正相加为负 或 负加负为正。</p>
 <p>正加负永不溢出。</p>
 <p>jo与jno为相关指令。</p>
 <p>非符号数加法也有溢出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ah,0FFh</span><br><span class="line">add ah,1;AH&#x3D;0,CF&#x3D;1 可以把CF当作非符号数的溢出标志</span><br><span class="line">		;OF&#x3D;0</span><br></pre></td></tr></table></figure>
-
-<h3 id="标志位-：PF，AF，DF，IF，TF"><a href="#标志位-：PF，AF，DF，IF，TF" class="headerlink" title="标志位 ：PF，AF，DF，IF，TF"></a>标志位 ：PF，AF，DF，IF，TF</h3><p>（1）、PF奇偶标志和AF辅助进位标志</p>
+<h3 id="标志位-pfafdfiftf"><a class="markdownIt-Anchor" href="#标志位-pfafdfiftf"></a> 标志位 ：PF，AF，DF，IF，TF</h3>
+<p>（1）、PF奇偶标志和AF辅助进位标志</p>
 <p>PF：运算结果低八位中1的个数为偶数则为1，否则为0</p>
 <p>jp  当PF=1时则跳，jp也可以写成jpe(even)</p>
 <p>jnp 当PF=0时则跳，jnp也可以写成jpo（odd）</p>
@@ -676,14 +757,12 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>AF 跟BCD(Binary Coded Decimal)码有关</p>
 <p>使用19h表示19，11h表示11，有利于取各位</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">19：11</span><br><span class="line">19h:11h</span><br><span class="line">19h &gt;&gt; 4  o1h 十位</span><br><span class="line">19h &amp; 0Fh 09h 个位</span><br><span class="line">11h+9&#x3D;1Ah 需要调整，只要+6即可;此时AF&#x3D;1</span><br><span class="line">11h+0Fh&#x3D;20h</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al,11h</span><br><span class="line">add al,9</span><br><span class="line">daa ; AL&#x3D;20h，daa只对AL中的值进行调整。</span><br></pre></td></tr></table></figure>
-
 <p>CF　ZF　SF　OF　AF PF 为状态标志</p>
 <p>DF TF IF：为控制标志</p>
 <p>DF：direction flag</p>
 <p>TF：trace/trap flag</p>
-<p> IF：interrupt flag</p>
+<p>IF：interrupt flag</p>
 <p>(2)DF方向标志，控制字符串的操作方向。</p>
 <p>DF=0时为正方向（低地址到高地址），DF是反方向。</p>
 <p>cld使DF=0，std使DF=1</p>
@@ -695,63 +774,70 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>sti指令使IF表示计算机硬件向CPu发出中断请求。</p>
 <p>允许中断时允许计算机硬件向cpu发出中断请求</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mov ax,0</span><br><span class="line">mov bx,1</span><br><span class="line">next:</span><br><span class="line">add ax,bx;若此则CPU则cpu，插入到int 9h指令中，读键盘编码并保存到键盘缓冲区中</span><br><span class="line">;硬件中断是由某个事件如用户敲键触发的，而不是程序员写int指令实现的。</span><br><span class="line">add bx,1</span><br><span class="line">cmp bx,100;若程序已经运行了1&#x2F;18秒，则cpu会子啊此处插入一条int 8h</span><br><span class="line">jbe next</span><br></pre></td></tr></table></figure>
-
 <p>使用cli和sti把一段代码包围起来可以达到该段代码在执行过程中不会被打断的效果。</p>
-<h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p><strong>如何定义一个函数并调用它？</strong></p>
+<h3 id="端口"><a class="markdownIt-Anchor" href="#端口"></a> 端口</h3>
+<p><strong>如何定义一个函数并调用它？</strong></p>
 <ol>
-<li><p>用标号定义</p>
+<li>
+<p>用标号定义</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">f:</span><br><span class="line">	inc ax</span><br><span class="line">	ret</span><br><span class="line">main:</span><br><span class="line">	mov ax,3</span><br><span class="line">	call f</span><br><span class="line">exit:</span><br><span class="line">	mov ah,2</span><br><span class="line">	mov dl,al</span><br><span class="line">	add al,&#39;0&#39;</span><br><span class="line">	int 21h;调用返回值</span><br><span class="line">	mov ah,4Ch</span><br><span class="line">	int 21h</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>用proc定义</p>
+<li>
+<p>用proc定义</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f proc;procedure 过程，可以理解为函数(function)</span><br><span class="line">	inc ax</span><br><span class="line">	ret</span><br><span class="line">f endp;end of procedure</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <p>端口编号就是端口地址。范围是:[0000h,0FFFFh],共 65536个端口。</p>
 <p>对端口的操作指令in与out实现，端口地址与内存地址无关。计算机语言有高级低级之分。汇编语言中要实现同样的功能 ，其代码也有高级低级之分。</p>
 <ol>
-<li><p>dos级别（高级）,不能读取F1~F12，也不能读取PgUp等</p>
+<li>
+<p>dos级别（高级）,不能读取F1~F12，也不能读取PgUp等</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">char c;</span><br><span class="line">c&#x3D;getchar();scanf(&quot;%c&quot;,&amp;c);</span><br><span class="line">mov ah,1</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>bios级别(中级)</p>
+<li>
+<p>bios级别(中级)</p>
 <p>TC中有一个BIOS级别的读键函数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unsigned short int key;</span><br><span class="line">key&#x3D;bioskey(0);</span><br></pre></td></tr></table></figure>
-
 <p>能读取F1~F12，方向键等</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah,0</span><br><span class="line">int 16h;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>端口级别(低)</p>
+<li>
+<p>端口级别(低)</p>
 <p>TC中可以调用key=inport(0x60);读取键</p>
 <p>in al,60h;端口级别的变成能够读到Ctrl</p>
 </li>
 </ol>
 <p>让硬盘的磁头移动到0道/0头/1扇区并读取该扇区的内容：</p>
 <ol>
-<li><p>bios</p>
+<li>
+<p>bios</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mov ah,2</span><br><span class="line">mov dl,80h;C</span><br><span class="line">mov dh,0;0头</span><br><span class="line">mov ch,0;0道</span><br><span class="line">mov cl.1;1扇区</span><br><span class="line">mov ax,seg buf</span><br><span class="line">mov es,ax</span><br><span class="line">mov bx,offset buf</span><br><span class="line">int 13h</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>端口</p>
+<li>
+<p>端口</p>
 <p>有许多out/in 指令</p>
 </li>
 </ol>
-<h3 id="段跨越"><a href="#段跨越" class="headerlink" title="段跨越"></a>段跨越</h3><p> 当[]中包含有寄存器bp时，该变量的段地址 一定是ss。</p>
+<h3 id="段跨越"><a class="markdownIt-Anchor" href="#段跨越"></a> 段跨越</h3>
+<p>当[]中包含有寄存器bp时，该变量的段地址 一定是ss。</p>
 <p>默认的段地址可以改变，如</p>
 <p>mov ax,[bp+2]-&gt;mov ax,ds:[bp+2]</p>
 <p>这条指令的源操作数段地址从默认的ss变成了ds</p>
 <p>这种情况称为段跨越。</p>
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h3 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov byte ptr ds:[bx],byte ptr es:[di];错误原因，两个操作数不能同时为内存变量。</span><br><span class="line">;以下为正确方式</span><br><span class="line">mov al,es:[dl]</span><br><span class="line">mov ds:[bx],al</span><br></pre></td></tr></table></figure>
-
-<h3 id="push-pop"><a href="#push-pop" class="headerlink" title="push pop"></a>push pop</h3><p>push、pop遵循先进后出的规则。push与pop后不能跟一个8位的寄存器或变量：</p>
+<h2 id="指令"><a class="markdownIt-Anchor" href="#指令"></a> 指令</h2>
+<h3 id="mov"><a class="markdownIt-Anchor" href="#mov"></a> mov</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov byte ptr ds:[bx],byte ptr es:[di];错误原因，两个操作数不能同时为内存变量。</span><br><span class="line">;以下为正确方式</span><br><span class="line">mov al,es:[dl]</span><br><span class="line">mov ds:[bx],al</span><br></pre></td></tr></table></figure>
+<h3 id="push-pop"><a class="markdownIt-Anchor" href="#push-pop"></a> push pop</h3>
+<p>push、pop遵循先进后出的规则。push与pop后不能跟一个8位的寄存器或变量：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push ah pop al;均错误</span><br><span class="line">push byte ptr ds:p[bx]</span><br></pre></td></tr></table></figure>
-
 <p>8086中，push不能跟一个常数，但80386及以后的cpu允许push一个常数。</p>
-<h3 id="xchg"><a href="#xchg" class="headerlink" title="xchg"></a>xchg</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov ax,1</span><br><span class="line">mov bx,2</span><br><span class="line">xchg ax,bx;交换</span><br><span class="line">xchg ax,ds:[bx]</span><br></pre></td></tr></table></figure>
-
-<h3 id="div"><a href="#div" class="headerlink" title="div"></a>div</h3><p>(1). 16位除以8位得8位</p>
-<p>ax/除数=AL$…$AH。被除数一定是ax</p>
+<h3 id="xchg"><a class="markdownIt-Anchor" href="#xchg"></a> xchg</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov ax,1</span><br><span class="line">mov bx,2</span><br><span class="line">xchg ax,bx;交换</span><br><span class="line">xchg ax,ds:[bx]</span><br></pre></td></tr></table></figure>
+<h3 id="div"><a class="markdownIt-Anchor" href="#div"></a> div</h3>
+<p>(1). 16位除以8位得8位</p>
+<p>ax/除数=AL<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">...</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.10556em;vertical-align:0em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span></span></span></span>AH。被除数一定是ax</p>
 <p>例如，AX=123h,BX=10h</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">div bh;AL&#x3D;12h,AH&#x3D;3h</span><br><span class="line">;fdiv 做小数除法</span><br></pre></td></tr></table></figure>
-
 <p>(2). 32位除以16位得16位</p>
 <p>dx:ax /除数= ax…dx</p>
 <p>例如：div bx</p>
@@ -763,7 +849,8 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>假定要把一个32位整数如7FFFFFFFh转换为十进制格式，则一定要使用（3）这种除法防止发生除法溢出。</p>
 <p>除法溢出时：</p>
 <p>会在div指令前面插入int 00h,但这条指令再内存中不存在</p>
-<h3 id="地址传送指令：LEA，LDS，LES"><a href="#地址传送指令：LEA，LDS，LES" class="headerlink" title="地址传送指令：LEA，LDS，LES"></a>地址传送指令：LEA，LDS，LES</h3><p>(1). lea dest,src</p>
+<h3 id="地址传送指令lealdsles"><a class="markdownIt-Anchor" href="#地址传送指令lealdsles"></a> 地址传送指令：LEA，LDS，LES</h3>
+<p>(1). lea dest,src</p>
 <p>load effective address =取变量的偏移地址。</p>
 <p>lea dx,ds:[1000h];</p>
 <p>mov dx,1000h;两条指令效果相同</p>
@@ -783,16 +870,17 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>fword ptr</p>
 <p>近指针：偏移地址就是近指针</p>
 <p>16位汇编中，近指针是指16位偏移地址</p>
-<h3 id="PUSHF-POPF-把标志寄存器FL压入堆栈-弹出堆栈"><a href="#PUSHF-POPF-把标志寄存器FL压入堆栈-弹出堆栈" class="headerlink" title="PUSHF,POPF(把标志寄存器FL压入堆栈/弹出堆栈)"></a>PUSHF,POPF<font color=red>(把标志寄存器FL压入堆栈/弹出堆栈)</font></h3><p><font color =red >有些寄存器不能用来作为push/pop的操作数</font></p>
+<h3 id="pushfpopffont-colorred把标志寄存器fl压入堆栈弹出堆栈font"><a class="markdownIt-Anchor" href="#pushfpopffont-colorred把标志寄存器fl压入堆栈弹出堆栈font"></a> PUSHF,POPF<font color=red>(把标志寄存器FL压入堆栈/弹出堆栈)</font></h3>
+<p><font color =red >有些寄存器不能用来作为push/pop的操作数</font></p>
 <p>push FL及pop FL均为错误用法</p>
 <p>push IP 及pop IP也是错误用法</p>
 <p>push cs正确，但是pop cs错误，因为cs不能用mov、pop指令改变，只能通过jmp、call、int指令间接改变。</p>
 <p>事实上，任何指令均不能引用FL，IP这两个寄存器。</p>
-<p>ip的值跟cs类似，需要通过jmp、call、int指令简介改变。<code>jmp 1234h</code>将ip改为1234h（隐式改变）</p>
+<p>ip的值跟cs类似，需要通过jmp、call、int指令简介改变。<code>jmp 1234h</code>将ip改为1234h（隐式改变）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">;p堆栈sh FL，不能写成push FL</span><br><span class="line">pop ax;ax&#x3D;FL</span><br><span class="line">or ax,100h;1 0000 0000B</span><br><span class="line">push ax</span><br><span class="line">popf ;FL&#x3D;ax</span><br></pre></td></tr></table></figure>
-
 <p>在32位系统中，EFL是一个32位寄存器，对应的指令是pushfd和popfd；若在32位系统中使用pushf/popf则控制的是EFL的低16位</p>
-<h3 id="符号扩充指令：CBW，CWD，CDQ"><a href="#符号扩充指令：CBW，CWD，CDQ" class="headerlink" title="符号扩充指令：CBW，CWD，CDQ"></a>符号扩充指令：CBW，CWD，CDQ</h3><p>cbw:convert byte to word</p>
+<h3 id="符号扩充指令cbwcwdcdq"><a class="markdownIt-Anchor" href="#符号扩充指令cbwcwdcdq"></a> 符号扩充指令：CBW，CWD，CDQ</h3>
+<p>cbw:convert byte to word</p>
 <p>cwd:convert word to double</p>
 <p>cdq:convert double to quadruple word</p>
 <p><font color =red >被扩充的一定为ax</font></p>
@@ -802,18 +890,21 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>cwd;把ax扩充成dx:ax,dx=FFFFh,ax=8000h</p>
 <p>mov eax,0ABCD1234h</p>
 <p>cdq;把eax扩充成edx:eax</p>
-<p>​    ;edx=0FFFFFFFFh,eax=0ABCD1234h</p>
+<p>​	;edx=0FFFFFFFFh,eax=0ABCD1234h</p>
 <p>要计算-2/2</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov al,-2</span><br><span class="line">cbw;ah &#x3D;0FFh,al&#x3D;0FEh</span><br><span class="line">mov bl,2</span><br><span class="line">idiv bl;idiv表示符号数除法</span><br><span class="line">		;al&#x3D;0FFh,ah&#x3D;0</span><br></pre></td></tr></table></figure>
-
-<h3 id="乘法指令mul-imul可做符号数的乘法"><a href="#乘法指令mul-imul可做符号数的乘法" class="headerlink" title="乘法指令mul (imul可做符号数的乘法)"></a>乘法指令mul (imul可做符号数的乘法)</h3><ul>
-<li><p>8*8=16</p>
+<h3 id="乘法指令mul-imul可做符号数的乘法"><a class="markdownIt-Anchor" href="#乘法指令mul-imul可做符号数的乘法"></a> 乘法指令mul (imul可做符号数的乘法)</h3>
+<ul>
+<li>
+<p>8*8=16</p>
 <p>被乘为AL，乘积为AX</p>
 </li>
-<li><p>16*16=32</p>
+<li>
+<p>16*16=32</p>
 <p>被乘为AX，乘积为DX:AX</p>
 </li>
-<li><p>32*32=64</p>
+<li>
+<p>32*32=64</p>
 <p>被乘为EAX，乘积为EDX：EAX</p>
 </li>
 </ul>
@@ -822,11 +913,12 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <li>imul eax,ebx;eax=eax*ebx</li>
 <li>imul eax,ebx,3;eax=ebx,3,这种用法第三个操作数只能是常数</li>
 </ul>
-<h3 id="换码指令：XLAT-translate-也称查表指令"><a href="#换码指令：XLAT-translate-也称查表指令" class="headerlink" title="换码指令：XLAT(translate)也称查表指令"></a>换码指令：XLAT(translate)也称查表指令</h3><p>在xlat执行前必须让ds:bx指向表，al必须赋值为数组的下标；执行xlat后，al=ds:[bx+AL]</p>
+<h3 id="换码指令xlattranslate也称查表指令"><a class="markdownIt-Anchor" href="#换码指令xlattranslate也称查表指令"></a> 换码指令：XLAT(translate)也称查表指令</h3>
+<p>在xlat执行前必须让ds:bx指向表，al必须赋值为数组的下标；执行xlat后，al=ds:[bx+AL]</p>
 <p>设ds=数组的段地址</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov ax, seg t</span><br><span class="line">mov ds,ax</span><br><span class="line">mov bx,offset t</span><br><span class="line">mov al,10;al为下标</span><br><span class="line">xlat;结果al&#x3D;ds:[bx+al]</span><br></pre></td></tr></table></figure>
-
-<h3 id="算术指令"><a href="#算术指令" class="headerlink" title="算术指令"></a>算术指令</h3><p>(1)加法指令：add,inc,adc</p>
+<h3 id="算术指令"><a class="markdownIt-Anchor" href="#算术指令"></a> 算术指令</h3>
+<p>(1)加法指令：add,inc,adc</p>
 <p>inc:increment</p>
 <p>mov ax,3</p>
 <p>inc ax;ax=ax+1=4</p>
@@ -834,7 +926,6 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>adc:带进位加</p>
 <p>计算12345678h+5678FFFFh</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov dx,1234h</span><br><span class="line">mov ax,5678h;ds:ax&#x3D;12345678h</span><br><span class="line">add ax,0FFFFh</span><br><span class="line">adc dx,5678h;dx&#x3D;dx+5678h+cf</span><br></pre></td></tr></table></figure>
-
 <p>(2)减法指令:sub,sbb,dec,neg,cmp</p>
 <p>dec为自减，不影响cf</p>
 <p><strong>neg</strong>:negate求相反数，会影响cf,zf,sf等标志位</p>
@@ -849,15 +940,15 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p><code>ja</code>,<code>jb</code>,<code>jae</code>,<code>jbe</code>是非符号数的相关跳转指令</p>
 <p><code>jg</code>,<code>jl</code>,<code>jge</code>,<code>jle</code>是<strong>符号数</strong>比较的相关跳转指令</p>
 <ul>
-<li>jg:SF==OF且ZF==0</li>
+<li>jg:SF<mark>OF且ZF</mark>0</li>
 <li>jge:SF==OF</li>
 <li>jl:SF!=OF</li>
-<li>jle:SF!=OF或（SF==OF且ZF==1）</li>
+<li>jle:SF!=OF或（SF<mark>OF且ZF</mark>1）</li>
 </ul>
-<h3 id="小数运算"><a href="#小数运算" class="headerlink" title="小数运算"></a>小数运算</h3><p><strong>fadd,fsub,fmul,fdiv</strong>(387指令)小数的+-*/运算指令，fld载入浮点数，fild载入整数</p>
+<h3 id="小数运算"><a class="markdownIt-Anchor" href="#小数运算"></a> 小数运算</h3>
+<p><strong>fadd,fsub,fmul,fdiv</strong>(387指令)小数的±*/运算指令，fld载入浮点数，fild载入整数</p>
 <p><strong>小数变量的定义：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pi dd 3.14;32位小数，相当于float</span><br><span class="line">r dq 3.14159;64位小数，相当于double</span><br><span class="line">			;q:quadruple</span><br><span class="line">s dt 3.14159265;80位小数，相当于longdouble</span><br></pre></td></tr></table></figure>
-
 <p>CPU内部有8个小数寄存器，分别叫做</p>
 <p>st(0),st(1)…st(7),宽度均为80位小数，st(0)可简化为st</p>
 <p>fstp xxx，保存结果到xxx中，并弹出st(0)</p>
@@ -868,36 +959,40 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <p>avx:advanced vector extension,256寄存器</p>
 <p>simd:single instruction multi-data，</p>
 <p>最新的交avx512指令，里面配套的寄存器有512位</p>
-<h2 id="字符串操作指令"><a href="#字符串操作指令" class="headerlink" title="字符串操作指令"></a>字符串操作指令</h2><h3 id="字符串传送指令：movsb-mobsw-movsd"><a href="#字符串传送指令：movsb-mobsw-movsd" class="headerlink" title="字符串传送指令：movsb,mobsw,movsd"></a>字符串传送指令：movsb,mobsw,movsd</h3><p>rep movsb;repeat mov string by byte</p>
+<h2 id="字符串操作指令"><a class="markdownIt-Anchor" href="#字符串操作指令"></a> 字符串操作指令</h2>
+<h3 id="字符串传送指令movsbmobswmovsd"><a class="markdownIt-Anchor" href="#字符串传送指令movsbmobswmovsd"></a> 字符串传送指令：movsb,mobsw,movsd</h3>
+<p>rep movsb;repeat mov string by byte</p>
 <p>准备工作:</p>
 <ul>
-<li><p>ds:si-&gt;源字符串(si 就是 sourse index,)</p>
+<li>
+<p>ds:si-&gt;源字符串(si 就是 sourse index,)</p>
 </li>
-<li><p>es:di-&gt;目标字符串(di 就是 destination index)</p>
+<li>
+<p>es:di-&gt;目标字符串(di 就是 destination index)</p>
 </li>
-<li><p>cx=移动次数(repeat次数)</p>
+<li>
+<p>cx=移动次数(repeat次数)</p>
 </li>
-<li><p>DF=0即方向标志设成正方向(用指令cld)</p>
+<li>
+<p>DF=0即方向标志设成正方向(用指令cld)</p>
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if (cx&#x3D;&#x3D;0)</span><br><span class="line">	goto done</span><br><span class="line">byte ptr es:[si]&#x3D;byte ptr ds:[si]</span><br><span class="line">if(df&#x3D;&#x3D;0)</span><br><span class="line">	si++;di++;</span><br><span class="line">else</span><br><span class="line">	si--;di--;</span><br><span class="line">cx--</span><br><span class="line">goto again</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
 <p>单独执行movsb指令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">byte ptr es:[si]&#x3D;byte ptr ds:[si]</span><br><span class="line">if(df&#x3D;&#x3D;0)</span><br><span class="line">	si++;di++;</span><br><span class="line">else</span><br><span class="line">	si--;di--;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 字符串比较指令：cmpsb,cmpsw,cmpsd</span><br><span class="line"></span><br><span class="line">cmpsb:</span><br><span class="line"></span><br><span class="line">比较byte  ptr ds:[si]与byte ptr es:[di]</span><br><span class="line"></span><br><span class="line">df&#x3D;0时，si++,di++ </span><br><span class="line"></span><br><span class="line">df&#x3D;1时，si--,di--</span><br><span class="line"></span><br><span class="line">repeat if equal 本次相等</span><br><span class="line"></span><br><span class="line">**repe cmpsb**（若本次比较相等则比较下一个**）**</span><br><span class="line"></span><br><span class="line">**repne cmpsb** (若本次比较不等则继续比较下一个)</span><br><span class="line"></span><br><span class="line">根据ZF&#x3D;1推出双方全等，表示循环结束后最后一次双方全等</span><br><span class="line"></span><br><span class="line">je 表示全等</span><br><span class="line"></span><br><span class="line">### 字符串扫描指令 scasb，scasw，scasd</span><br><span class="line"></span><br><span class="line">scasb:</span><br><span class="line"></span><br><span class="line">​	cmp al,es:[di]</span><br><span class="line"></span><br><span class="line">​	di++;当DF&#x3D;1时，di--</span><br><span class="line"></span><br><span class="line">repne scasb:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;assembly</span><br><span class="line">next:</span><br><span class="line">	if(cx&#x3D;&#x3D;0) goto done;	</span><br><span class="line">		cmp al es:[di]</span><br><span class="line">			di++;</span><br><span class="line">cx--;</span><br><span class="line">je done</span><br><span class="line">goto done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串操作指令-stosb与lodsb"><a href="#字符串操作指令-stosb与lodsb" class="headerlink" title="字符串操作指令 stosb与lodsb"></a>字符串操作指令 stosb与lodsb</h3><h4 id="store"><a href="#store" class="headerlink" title="store"></a>store</h4><p>stosb:</p>
+<h3 id="字符串操作指令-stosb与lodsb"><a class="markdownIt-Anchor" href="#字符串操作指令-stosb与lodsb"></a> 字符串操作指令 stosb与lodsb</h3>
+<h4 id="store"><a class="markdownIt-Anchor" href="#store"></a> store</h4>
+<p>stosb:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">;将1000:10A0开始共100h个字节内存单元全部填0</span><br><span class="line">mov ax,1000h</span><br><span class="line">mov es,ax</span><br><span class="line">mov di,10A0h</span><br><span class="line">mov cx,100h</span><br><span class="line">cld</span><br><span class="line">xor al,al</span><br><span class="line">rep stosb</span><br></pre></td></tr></table></figure>
-
-<h4 id="lodsb"><a href="#lodsb" class="headerlink" title="lodsb"></a>lodsb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AL&#x3D;DS:[SI]</span><br><span class="line">SI++;DF&#x3D;&#x3D;1-&gt;SI--</span><br><span class="line">;lodsb通常没有rep</span><br></pre></td></tr></table></figure>
-
+<h4 id="lodsb"><a class="markdownIt-Anchor" href="#lodsb"></a> lodsb</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AL&#x3D;DS:[SI]</span><br><span class="line">SI++;DF&#x3D;&#x3D;1-&gt;SI--</span><br><span class="line">;lodsb通常没有rep</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">;例如：设ds:si-&gt;&#39;##AB#12#XY&#39;,过滤&#39;#&#39;</span><br><span class="line"> cld</span><br><span class="line"> again:</span><br><span class="line"> 	lodsb;</span><br><span class="line"> 	cmp al,&#39;#&#39;</span><br><span class="line"> 	je next</span><br><span class="line"> 	stosb</span><br><span class="line"> next:</span><br><span class="line"> 	dec cx</span><br><span class="line"> 	jnz again</span><br></pre></td></tr></table></figure>
-
-<h2 id="控制转移指令-jmp-call-int"><a href="#控制转移指令-jmp-call-int" class="headerlink" title="控制转移指令:jmp call int"></a>控制转移指令:jmp call int</h2><h3 id="jmp"><a href="#jmp" class="headerlink" title="jmp"></a>jmp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jmp short target ;短跳(1字节),所有的条件跳转指令都是短跳</span><br><span class="line">jmp near ptr target;近跳(2字节)</span><br><span class="line">jmp far ptr target;远跳(4字节)</span><br></pre></td></tr></table></figure>
-
+<h2 id="控制转移指令jmp-call-int"><a class="markdownIt-Anchor" href="#控制转移指令jmp-call-int"></a> 控制转移指令:jmp call int</h2>
+<h3 id="jmp"><a class="markdownIt-Anchor" href="#jmp"></a> jmp</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jmp short target ;短跳(1字节),所有的条件跳转指令都是短跳</span><br><span class="line">jmp near ptr target;近跳(2字节)</span><br><span class="line">jmp far ptr target;远跳(4字节)</span><br></pre></td></tr></table></figure>
 <p>短跳太远跳不过去的解决方法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cmp ax,bx</span><br><span class="line">je equal;改为jne not_equal</span><br><span class="line">		;    jmp equal</span><br><span class="line">not_equal:</span><br><span class="line">....;</span><br><span class="line">equal:</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
 <p>近跳的三种格式</p>
 <ul>
 <li>jmp 偏移地址或标号</li>
@@ -909,48 +1004,48 @@ add esp 0Ch      最后一步清除堆栈，0Ch为12，即上面三条push</code
 <li>jmp 段地址</li>
 <li>jmp dword ptr 32 位变量</li>
 </ul>
-<h3 id="循环指令：loop"><a href="#循环指令：loop" class="headerlink" title="循环指令：loop"></a>循环指令：loop</h3><p>loop dest 的操作过程</p>
+<h3 id="循环指令loop"><a class="markdownIt-Anchor" href="#循环指令loop"></a> 循环指令：loop</h3>
+<p>loop dest 的操作过程</p>
 <p>cx=cx-1</p>
 <p>if(cx!=0)</p>
-<p>​    do</p>
+<p>​	do</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jcxz done;防止cx为0进入循环,</span><br><span class="line">next:</span><br><span class="line">add ax,cx</span><br><span class="line">dec cx;cx&#x3D;0时，循环10000h次</span><br><span class="line">jnz next;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure>
-
-<h3 id="call，ret指令"><a href="#call，ret指令" class="headerlink" title="call，ret指令"></a>call，ret指令</h3><p>使用call时，cpu会把下条指令的偏移地址压入堆栈</p>
+<h3 id="callret指令"><a class="markdownIt-Anchor" href="#callret指令"></a> call，ret指令</h3>
+<p>使用call时，cpu会把下条指令的偏移地址压入堆栈</p>
 <p>ret时，cpu会从堆栈中弹出一个字，并把此字赋值给ip</p>
 <p>远调用：call far ptr 或call dword ptr</p>
-<p>  、在调用时，cpu会先压入下条指令的段地址即cs，再压入下条指令的偏移地址即offset next,最后jmp far ptr </p>
+<p>、在调用时，cpu会先压入下条指令的段地址即cs，再压入下条指令的偏移地址即offset next,最后jmp far ptr</p>
 <p>远返回:retf,cpu会先做pop ip，再pop cs</p>
 <p>32位系统下的远调用：</p>
 <p>call far ptr或call fword ptr [abc]，表示abc里面保存了48位的远指针</p>
 <ol>
-<li><p>汇编语言中的三种参数传递方式</p>
+<li>
+<p>汇编语言中的三种参数传递方式</p>
 <ul>
 <li>寄存器传递法</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">f:</span><br><span class="line">	add ax,ax</span><br><span class="line">	ret</span><br><span class="line">main:</span><br><span class="line">	mov ax,e</span><br><span class="line">	call f</span><br><span class="line">next:</span><br><span class="line">	mov ah,4Ch</span><br><span class="line">	int 21h</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>变量传递(不支持多线程)</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f:</span><br><span class="line">	mov ax,var</span><br><span class="line">	add ax,ax</span><br><span class="line">	ret</span><br><span class="line">main:</span><br><span class="line">	mov var,3</span><br><span class="line">	call f</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>堆栈传递</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">f:</span><br><span class="line">	push bp</span><br><span class="line">	mov bp,sp;此两句可构造堆栈框架</span><br><span class="line">	mov ax,[bp+4]</span><br><span class="line">	pop bp</span><br><span class="line">	ret</span><br><span class="line">main:</span><br><span class="line">	mov ax,3</span><br><span class="line">	push ax</span><br><span class="line">	call f</span><br><span class="line">	add sp,2</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <p>动态变量</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f:</span><br><span class="line">	push bp</span><br><span class="line">	mov bp,sp</span><br><span class="line">	sub sp,2</span><br><span class="line">	mov ax,[bp+4]</span><br><span class="line">	add ax,[bp+6]</span><br></pre></td></tr></table></figure>
-
-<h2 id="int、iret"><a href="#int、iret" class="headerlink" title="int、iret"></a>int、iret</h2><p>int 21h对应的函数首地址保存在0：84h处，该地址时一个远指针。</p>
+<h2 id="int-iret"><a class="markdownIt-Anchor" href="#int-iret"></a> int、iret</h2>
+<p>int 21h对应的函数首地址保存在0：84h处，该地址时一个远指针。</p>
 <p>dword ptr 0:[84h]称为int 21h的中断向量（其实是他的函数首地址）</p>
 <p>int n对应的中断向量的存储位置一定是0:n*4</p>
 <p>n的范围是[00,FF],所以256个中断向量会占用0:0~0:3FF之间龚400h个字节内存，这块区域称为中断向量表。</p>
 <p>中断向量的初始化由BIOS(int 10h,int 16h,int 13h,int 8,int 9等)及dos(int 21h)负责填入</p>
 <p>用户可以修改中断变量，但改的时候通常需要保存原来的中断变量，以便让代码与老代码链接起来。</p>
-<h2 id="混合语言编程"><a href="#混合语言编程" class="headerlink" title="混合语言编程"></a>混合语言编程</h2><ol>
+<h2 id="混合语言编程"><a class="markdownIt-Anchor" href="#混合语言编程"></a> 混合语言编程</h2>
+<ol>
 <li>C源代码嵌入汇编指令</li>
 <li>把.c和.asm分别编译成.obj, 再通过link把两个.obj加起来生成.exe</li>
 </ol>

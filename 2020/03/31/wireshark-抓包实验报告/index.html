@@ -18,12 +18,12 @@
   
   
   <title>Wireshark抓包实验报告 | Amb1t10n&#39;s blog</title>
-  <meta name="description" content="Wireshark抓包实验报告  专业班级：图灵1901 &amp;nbsp;  学号 ：3190104667 &amp;nbsp; 姓名： 张喜瑜   【实验目的】 了解TCP&#x2F;IP协议下五层协议及其作用。   利用wireshark进行抓包，分析TCP与UDP包，并理解packet headers 是如何被封装的。   了解TCP的三次握手的过程。  【实验步骤】 打开浏览器与Wireshark   在捕获选">
+  <meta name="description" content="Wireshark抓包实验报告   专业班级：图灵1901 &amp;nbsp;  学号 ：3190104667 &amp;nbsp; 姓名： 张喜瑜   【实验目的】  了解TCP&#x2F;IP协议下五层协议及其作用。 利用wireshark进行抓包，分析TCP与UDP包，并理解packet headers 是如何被封装的。 了解TCP的三次握手的过程。   【实验步骤】  打开浏览器与Wireshark  在捕获选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Wireshark抓包实验报告">
 <meta property="og:url" content="http://amb1t10n.github.io/2020/03/31/wireshark-%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/index.html">
 <meta property="og:site_name" content="amb1t10n&#39;s blog">
-<meta property="og:description" content="Wireshark抓包实验报告  专业班级：图灵1901 &amp;nbsp;  学号 ：3190104667 &amp;nbsp; 姓名： 张喜瑜   【实验目的】 了解TCP&#x2F;IP协议下五层协议及其作用。   利用wireshark进行抓包，分析TCP与UDP包，并理解packet headers 是如何被封装的。   了解TCP的三次握手的过程。  【实验步骤】 打开浏览器与Wireshark   在捕获选">
+<meta property="og:description" content="Wireshark抓包实验报告   专业班级：图灵1901 &amp;nbsp;  学号 ：3190104667 &amp;nbsp; 姓名： 张喜瑜   【实验目的】  了解TCP&#x2F;IP协议下五层协议及其作用。 利用wireshark进行抓包，分析TCP与UDP包，并理解packet headers 是如何被封装的。 了解TCP的三次握手的过程。   【实验步骤】  打开浏览器与Wireshark  在捕获选">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/03/27/jTOLVFioDm8fprA.png">
 <meta property="og:image" content="https://i.loli.net/2020/03/27/Ao3JG2bwcy7uzlk.png">
@@ -395,31 +395,69 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="Wireshark抓包实验报告"><a href="#Wireshark抓包实验报告" class="headerlink" title="Wireshark抓包实验报告"></a><center>Wireshark抓包实验报告</center></h1><center>
+        <h1 id="centerwireshark抓包实验报告center"><a class="markdownIt-Anchor" href="#centerwireshark抓包实验报告center"></a> <center>Wireshark抓包实验报告</center></h1>
+<center>
  专业班级：图灵1901 &nbsp;  学号 ：3190104667 &nbsp; 姓名： 张喜瑜
 </center>
-
-<h2 id="【实验目的】"><a href="#【实验目的】" class="headerlink" title="【实验目的】"></a><strong>【实验目的】</strong></h2><ol>
-<li>了解TCP/IP协议下五层协议及其作用。  </li>
-<li>利用wireshark进行抓包，分析TCP与UDP包，并理解packet headers 是如何被封装的。  </li>
-<li>了解TCP的三次握手的过程。  <h2 id="【实验步骤】"><a href="#【实验步骤】" class="headerlink" title="【实验步骤】"></a><strong>【实验步骤】</strong></h2></li>
-<li>打开浏览器与Wireshark<br><img src="https://i.loli.net/2020/03/27/jTOLVFioDm8fprA.png" alt="1.PNG">  </li>
-<li>在捕获选项中双击选择“以太网”，并开始抓包<br><img src="https://i.loli.net/2020/03/27/Ao3JG2bwcy7uzlk.png" alt="2.PNG"></li>
-<li>在浏览器中打开网站，如 <a href="https://www.3dmgame.com/" target="_blank" rel="noopener">https://www.3dmgame.com/</a>  </li>
-<li>停止抓包并分析抓包结果    </li>
-<li>在过滤器中选择http过滤，并查看过滤结果。选择GET / HTTP/1.1 中记录，右键-&gt;追踪流-&gt;tcp流，查看前三个TCP包中Transmission Control Protocol内容，分析三次握手过程。<br><img src="https://i.loli.net/2020/03/27/upwqvDGLJMkYfVz.png" alt="3.PNG">)<img src="https://i.imgur.com/bgCLTyF.png" alt="">  </li>
-<li>再在过滤器中键入udp,双击并查看User Datagram Protcol 中内容。<br><img src="https://i.loli.net/2020/03/27/1rT5CnEKPecRswp.png" alt="4.png">  <h2 id="【实验结果】"><a href="#【实验结果】" class="headerlink" title="【实验结果】"></a><strong>【实验结果】</strong></h2></li>
-<li>TCP/IP协议下五层协议是什么，它们有什么作用？<br>&emsp;TCP/IP协议下，从上到下一共有五层：应用层、运输层、网络层、链路层、物理层<br><strong>应用层</strong>：应用层是网络应用程序及它们的应用层协议存留的地方，如HTTP（提供Web文档的请求与传送），SMTP（提供电子邮件报文的传输）和FTP(提供两个端系统之间的文件传送)，由DNS完成域名到比特网络地址的转换。  </li>
+<h2 id="实验目的"><a class="markdownIt-Anchor" href="#实验目的"></a> <strong>【实验目的】</strong></h2>
+<ol>
+<li>了解TCP/IP协议下五层协议及其作用。</li>
+<li>利用wireshark进行抓包，分析TCP与UDP包，并理解packet headers 是如何被封装的。</li>
+<li>了解TCP的三次握手的过程。</li>
 </ol>
-<p><strong>运输层</strong>：运输层在应用程序端点之间传送应用层报文。在因特网中，存在两个传输协议，TCP和UDP，利用其中的任一个都能运输应用层报文。TCP向它的应用程序提供了面向连接的服务。UDP协议向它的应用程序提供无连接服务。<br><strong>网络层</strong>:网络层负责将数据报的网络层分组从一台主机移动到另一台主机。<br><strong>链路层</strong>：通过一系列路由器在源和目的地之间发送分组，实现数据的传递。<br><strong>物理层</strong>：将链路层要移动的帧中的比特一个一个从一个节点移动到下一个节点。这层协议与链路层相关，与实际传输媒体相关，如铜线，光纤，无线电。<br>2. 举例说明TCP的三次握手是如何实现的？<br>我们从下图中可以看到，经过三次TCP包的传输之后，得到了HTTP包。并且我们知道了，客户端的ip address:192.168.1.117,服务器ip address:122.195.200.82<br><img src="https://i.imgur.com/Z51TGqR.png" alt=""><br>从客户端发送给服务器一个TCP数据包，标志位位[SYN]，Seq=0，表示客户端请求连接。此时服务器确认服务器的接收能力与客户端发送能力正常。<br>下图为TCP第二次握手的数据包，由服务器发送给客户端，标志位为[SYN，ACK],此时，返回的数据包中，Seq=0,Ack=客户端发送的数据包中Seq+1，即Ack=0+1=1。此时，客户端确认客户端的接收，发送能力与服务器的接收，发送能力正常。<br><img src="https://i.imgur.com/UgiPAsA.png" alt=""><br>再第三次TCP握手中，由客户端发送给服务器发送确认包，将Ack设置为对方发来的Seq+1，即0+1=1。此时，服务器确认到双方的发送与接收能力正常。<br><img src="https://i.imgur.com/EpYTdOo.png" alt=""><br>经过三次握手之后，客户端与服务器均确认双方接收与发送数据包的能力正常，可以建立连接。<br>3. 用一个TCP包与UDP包举例说明packet headers是怎样组成的<br>如图所示为<strong>TCP</strong> packet header及12位标志位内容<br><img src="https://i.imgur.com/J6sZIX3.png" alt="">)<img src="https://i.imgur.com/lhLik8e.png" alt=""><br>这是第一次握手时，客户端发送到服务器的TCP数据报，该packet表示请求建立连接，故无确认序号，A/Acknowledgment为0，S/Syn为1.<br>下图为<strong>UDP packet header</strong>中内容<br><img src="https://i.imgur.com/sU2d7Ty.png" alt=""><br>再过滤获得UDP数据报时，过滤结果并不只有UDP，还有OICQ、SSDP、MDNS、DNS等等，这些都是基于UDP，故得到不知UDP协议。<br>对比TCP以及UDP packet header内容，可以发现二者所含内容有较大区别。在搜索相关资料后了解到：</p>
+<h2 id="实验步骤"><a class="markdownIt-Anchor" href="#实验步骤"></a> <strong>【实验步骤】</strong></h2>
+<ol>
+<li>打开浏览器与Wireshark<br />
+<img src="https://i.loli.net/2020/03/27/jTOLVFioDm8fprA.png" alt="1.PNG" /></li>
+<li>在捕获选项中双击选择“以太网”，并开始抓包<br />
+<img src="https://i.loli.net/2020/03/27/Ao3JG2bwcy7uzlk.png" alt="2.PNG" /></li>
+<li>在浏览器中打开网站，如 <a href="https://www.3dmgame.com/" target="_blank" rel="noopener">https://www.3dmgame.com/</a></li>
+<li>停止抓包并分析抓包结果</li>
+<li>在过滤器中选择http过滤，并查看过滤结果。选择GET / HTTP/1.1 中记录，右键-&gt;追踪流-&gt;tcp流，查看前三个TCP包中Transmission Control Protocol内容，分析三次握手过程。<br />
+<img src="https://i.loli.net/2020/03/27/upwqvDGLJMkYfVz.png" alt="3.PNG" /><img src="https://i.imgur.com/bgCLTyF.png" alt="" /></li>
+<li>再在过滤器中键入udp,双击并查看User Datagram Protcol 中内容。<br />
+<img src="https://i.loli.net/2020/03/27/1rT5CnEKPecRswp.png" alt="4.png" /></li>
+</ol>
+<h2 id="实验结果"><a class="markdownIt-Anchor" href="#实验结果"></a> <strong>【实验结果】</strong></h2>
+<ol>
+<li>TCP/IP协议下五层协议是什么，它们有什么作用？<br />
+ TCP/IP协议下，从上到下一共有五层：应用层、运输层、网络层、链路层、物理层<br />
+<strong>应用层</strong>：应用层是网络应用程序及它们的应用层协议存留的地方，如HTTP（提供Web文档的请求与传送），SMTP（提供电子邮件报文的传输）和FTP(提供两个端系统之间的文件传送)，由DNS完成域名到比特网络地址的转换。<br />
+<strong>运输层</strong>：运输层在应用程序端点之间传送应用层报文。在因特网中，存在两个传输协议，TCP和UDP，利用其中的任一个都能运输应用层报文。TCP向它的应用程序提供了面向连接的服务。UDP协议向它的应用程序提供无连接服务。<br />
+<strong>网络层</strong>:网络层负责将数据报的网络层分组从一台主机移动到另一台主机。<br />
+<strong>链路层</strong>：通过一系列路由器在源和目的地之间发送分组，实现数据的传递。<br />
+<strong>物理层</strong>：将链路层要移动的帧中的比特一个一个从一个节点移动到下一个节点。这层协议与链路层相关，与实际传输媒体相关，如铜线，光纤，无线电。</li>
+<li>举例说明TCP的三次握手是如何实现的？<br />
+我们从下图中可以看到，经过三次TCP包的传输之后，得到了HTTP包。并且我们知道了，客户端的ip address:192.168.1.117,服务器ip address:122.195.200.82<br />
+<img src="https://i.imgur.com/Z51TGqR.png" alt="" /><br />
+从客户端发送给服务器一个TCP数据包，标志位位[SYN]，Seq=0，表示客户端请求连接。此时服务器确认服务器的接收能力与客户端发送能力正常。<br />
+下图为TCP第二次握手的数据包，由服务器发送给客户端，标志位为[SYN，ACK],此时，返回的数据包中，Seq=0,Ack=客户端发送的数据包中Seq+1，即Ack=0+1=1。此时，客户端确认客户端的接收，发送能力与服务器的接收，发送能力正常。<br />
+<img src="https://i.imgur.com/UgiPAsA.png" alt="" /><br />
+再第三次TCP握手中，由客户端发送给服务器发送确认包，将Ack设置为对方发来的Seq+1，即0+1=1。此时，服务器确认到双方的发送与接收能力正常。<br />
+<img src="https://i.imgur.com/EpYTdOo.png" alt="" /><br />
+经过三次握手之后，客户端与服务器均确认双方接收与发送数据包的能力正常，可以建立连接。</li>
+<li>用一个TCP包与UDP包举例说明packet headers是怎样组成的<br />
+如图所示为<strong>TCP</strong> packet header及12位标志位内容<br />
+<img src="https://i.imgur.com/J6sZIX3.png" alt="" /><img src="https://i.imgur.com/lhLik8e.png" alt="" /><br />
+这是第一次握手时，客户端发送到服务器的TCP数据报，该packet表示请求建立连接，故无确认序号，A/Acknowledgment为0，S/Syn为1.<br />
+下图为<strong>UDP packet header</strong>中内容<br />
+<img src="https://i.imgur.com/sU2d7Ty.png" alt="" /><br />
+再过滤获得UDP数据报时，过滤结果并不只有UDP，还有OICQ、SSDP、MDNS、DNS等等，这些都是基于UDP，故得到不知UDP协议。<br />
+对比TCP以及UDP packet header内容，可以发现二者所含内容有较大区别。在搜索相关资料后了解到：</li>
+</ol>
 <ul>
 <li>TCP与UDP分别给予连接与无连接</li>
 <li>TCP能够保证数据正确性，UDP可能丢包</li>
-<li>TCP保证数据顺序，UDP不保证  </li>
+<li>TCP保证数据顺序，UDP不保证</li>
 </ul>
 <ol start="4">
-<li>举例说明怎样利用TCP三次握手做DDoS攻击<br>由于TCP在发送数据段的同时启动一个重传，若在重传超时之前收到Acknowledgment就关闭重传，若没有收到，则重传该数据段。而且TCP保证数据顺序，则可以伪造源IP地址，向服务器发送大量的Syn报文，当服务器回复Syn+Ack报文时，客户端不予回应，使Syn+Ack报文被重传，从而占据半开连接队列，阻止其他用户访问。  </li>
-<li>重放攻击的原理是怎样的，提供一种可能的防御手段，分析优缺点。<br>重放攻击的基本原理就是把以前窃听到的数据原封不动地重新发送给接收方，从而达到欺骗系统的目的。<br>可以采用一次性密钥，每次数据传输的加密密钥均需更改，即使将捕获的数据报重新发送，也达不到目的。<br>优点：密码只能使用一次，为动态产生，所以不可预测，也只有一次使用有效性，可以有效防御重放攻击。<br>缺点：若客户端和服务器双方时间不同步或者由于其他网络因素，导致客户端在密钥有效时间内无法输入，导致合法用户无法登录。</li>
+<li>举例说明怎样利用TCP三次握手做DDoS攻击<br />
+由于TCP在发送数据段的同时启动一个重传，若在重传超时之前收到Acknowledgment就关闭重传，若没有收到，则重传该数据段。而且TCP保证数据顺序，则可以伪造源IP地址，向服务器发送大量的Syn报文，当服务器回复Syn+Ack报文时，客户端不予回应，使Syn+Ack报文被重传，从而占据半开连接队列，阻止其他用户访问。</li>
+<li>重放攻击的原理是怎样的，提供一种可能的防御手段，分析优缺点。<br />
+重放攻击的基本原理就是把以前窃听到的数据原封不动地重新发送给接收方，从而达到欺骗系统的目的。<br />
+可以采用一次性密钥，每次数据传输的加密密钥均需更改，即使将捕获的数据报重新发送，也达不到目的。<br />
+优点：密码只能使用一次，为动态产生，所以不可预测，也只有一次使用有效性，可以有效防御重放攻击。<br />
+缺点：若客户端和服务器双方时间不同步或者由于其他网络因素，导致客户端在密钥有效时间内无法输入，导致合法用户无法登录。</li>
 </ol>
 
       
