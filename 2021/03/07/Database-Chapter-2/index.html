@@ -17,16 +17,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Amb1t10n&#39;s blog</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="amb1t10n&#39;s blog">
-<meta property="og:url" content="http://amb1t10n.github.io/index.html">
+  <title>Database Chapter 2 | Amb1t10n&#39;s blog</title>
+  <meta name="description" content="Chapter 2  2.1 Relational Model A relational database is a collection of one or more relations, which are based on relational model. A relation is a table with rows and columns. The major advantages">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Database Chapter 2">
+<meta property="og:url" content="http://amb1t10n.github.io/2021/03/07/Database-Chapter-2/index.html">
 <meta property="og:site_name" content="amb1t10n&#39;s blog">
+<meta property="og:description" content="Chapter 2  2.1 Relational Model A relational database is a collection of one or more relations, which are based on relational model. A relation is a table with rows and columns. The major advantages">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210307204050880.png">
+<meta property="og:image" content="c:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210307204107253.png">
+<meta property="article:published_time" content="2021-03-07T12:28:52.000Z">
+<meta property="article:modified_time" content="2021-03-07T12:41:09.058Z">
 <meta property="article:author" content="amb1t10n">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210307204050880.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://amb1t10n.github.io/index.html">
+  <link rel="canonical" href="http://amb1t10n.github.io/2021/03/07/Database-Chapter-2/index.html">
   
     <link rel="alternate" href="/atom.xml" title="amb1t10n&#39;s blog" type="application/atom+xml">
   
@@ -340,318 +347,126 @@
 </aside>
 
   
-  <main class="main" role="main">
   
-  <div class="content article-list">
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Database-Chapter-2" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
+    <div class="article-header">
+      
+        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/07/Database-Chapter-2/">Database Chapter 2</a>
+    <h1 class="article-title" itemprop="name">
+      Database Chapter 2
     </h1>
   
 
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
+      
+      <div class="article-meta">
+        <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2021/03/07/Database-Chapter-2/" class="article-date">
-	  <time datetime="2021-03-07T12:28:52.000Z" itemprop="datePublished">3月 7</time>
+	  <time datetime="2021-03-07T12:28:52.000Z" itemprop="datePublished">2021-03-07</time>
 	</a>
 </span>
-    
-    
+        
+        
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/07/Database-Chapter-2/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
+        
 
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/06/Red-Black-Tree/">Red-Black Tree</a>
-    </h1>
-  
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/07/Database-Chapter-2/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="chapter-2"><a class="markdownIt-Anchor" href="#chapter-2"></a> Chapter 2</h1>
+<h2 id="21-relational-model"><a class="markdownIt-Anchor" href="#21-relational-model"></a> 2.1 Relational Model</h2>
+<p>A relational database is a collection of one or more relations, which are based on relational model.</p>
+<p>A relation is a <em>table</em> with <em>rows</em> and <em>columns</em>.</p>
+<p>The major advantages of the relational model are its <em>simple data representation</em> and <em>the ease</em> with which even complex queries can be expressed.</p>
+<p>##2.2 Basic Structure</p>
+<p>Formally , given sets <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>D</mi><mn>2</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>D</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">D_1,D_2,\dots,D_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> , a relation <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> is a subset of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>×</mo><msub><mi>D</mi><mn>2</mn></msub><mo>×</mo><mo>⋯</mo><mo>×</mo><msub><mi>D</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">D_1\times D_2\times \dots\times D_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>Each attribute of a relation has a name</p>
+<p>The set of allowed values for each attribute is called <font color = red>domain of the attribute</font></p>
+<p>Attribute values are (normally) required to be <font color =  red>atomic</font>, that is, indivisible.</p>
+<p><img src="C:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210307204050880.png" alt="image-20210307204050880" /></p>
+<p><img src="C:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210307204107253.png" alt="image-20210307204107253" /></p>
 
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://amb1t10n.github.io/2021/03/07/Database-Chapter-2/" title="Database Chapter 2" target="_blank" rel="external">http://amb1t10n.github.io/2021/03/07/Database-Chapter-2/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">Amb1t10n</span><small class="ml-1x">Student</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
+</div>
+
+
+    </div>
+  </article>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/03/06/Red-Black-Tree/" class="article-date">
-	  <time datetime="2021-03-06T06:01:56.000Z" itemprop="datePublished">3月 6</time>
-	</a>
-</span>
     
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
     
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/ads/" rel="tag">ads</a>
-  </span>
+  </section>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/06/Red-Black-Tree/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/04/Database-note/">Database Chapter 1</a>
-    </h1>
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
-
-  </div>
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/03/06/Red-Black-Tree/" title="Red-Black Tree"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/03/04/Database-note/" class="article-date">
-	  <time datetime="2021-03-04T12:12:57.000Z" itemprop="datePublished">3月 4</time>
-	</a>
-</span>
-    
-    
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/04/Database-note/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/17/%E7%A6%BB%E6%95%A3%E7%AC%94%E8%AE%B0/">离散笔记</a>
-    </h1>
   
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/05/17/%E7%A6%BB%E6%95%A3%E7%AC%94%E8%AE%B0/" class="article-date">
-	  <time datetime="2020-05-17T04:17:22.606Z" itemprop="datePublished">5月 17</time>
-	</a>
-</span>
+  <div class="bar-right">
     
-    
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/17/%E7%A6%BB%E6%95%A3%E7%AC%94%E8%AE%B0/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/14/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">物联网安全实验报告</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/04/14/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" class="article-date">
-	  <time datetime="2020-04-14T08:08:31.957Z" itemprop="datePublished">4月 14</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/report/" rel="tag">report</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/14/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/31/buffer-overflow/">buffer overflow</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/03/31/buffer-overflow/" class="article-date">
-	  <time datetime="2020-03-31T12:06:33.000Z" itemprop="datePublished">3月 31</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/report/" rel="tag">report</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/31/buffer-overflow/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/31/wireshark-%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">Wireshark抓包实验报告</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/03/31/wireshark-%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" class="article-date">
-	  <time datetime="2020-03-31T12:06:33.000Z" itemprop="datePublished">3月 31</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/report/" rel="tag">report</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/31/wireshark-%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/23/%E6%B1%87%E7%BC%96%E7%AC%94%E8%AE%B0/">汇编笔记</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/03/23/%E6%B1%87%E7%BC%96%E7%AC%94%E8%AE%B0/" class="article-date">
-	  <time datetime="2020-03-23T04:59:54.555Z" itemprop="datePublished">3月 23</time>
-	</a>
-</span>
-    
-    
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/23/%E6%B1%87%E7%BC%96%E7%AC%94%E8%AE%B0/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/page/">Note of Discrete Mathematics and Its Applications</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/03/01/page/" class="article-date">
-	  <time datetime="2020-03-01T08:00:48.000Z" itemprop="datePublished">3月 1</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/note/">note</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/study/" rel="tag">study</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/01/page/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/14/my-annual-summary/">C语言指针</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/01/14/my-annual-summary/" class="article-date">
-	  <time datetime="2020-01-14T01:58:48.000Z" itemprop="datePublished">1月 14</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/study/" rel="tag">study</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/01/14/my-annual-summary/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
     
   </div>
+  </div>
+</nav>
+  
 
-   
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -716,6 +531,33 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
    
 
 
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 

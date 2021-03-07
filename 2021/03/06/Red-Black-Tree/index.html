@@ -17,16 +17,25 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Amb1t10n&#39;s blog</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="amb1t10n&#39;s blog">
-<meta property="og:url" content="http://amb1t10n.github.io/index.html">
+  <title>Red-Black Tree | Amb1t10n&#39;s blog</title>
+  <meta name="description" content="Definition : A red-black tree is a binary search tree that satisfies the following red-black properties :  Every node is either red or black The root is black Every leaf is black If a node is red, the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Red-Black Tree">
+<meta property="og:url" content="http://amb1t10n.github.io/2021/03/06/Red-Black-Tree/index.html">
 <meta property="og:site_name" content="amb1t10n&#39;s blog">
+<meta property="og:description" content="Definition : A red-black tree is a binary search tree that satisfies the following red-black properties :  Every node is either red or black The root is black Every leaf is black If a node is red, the">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210306140553142.png">
+<meta property="og:image" content="c:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210306141838721.png">
+<meta property="og:image" content="c:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210306164730557.png">
+<meta property="article:published_time" content="2021-03-06T06:01:56.000Z">
+<meta property="article:modified_time" content="2021-03-07T08:05:25.438Z">
 <meta property="article:author" content="amb1t10n">
+<meta property="article:tag" content="ads">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210306140553142.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://amb1t10n.github.io/index.html">
+  <link rel="canonical" href="http://amb1t10n.github.io/2021/03/06/Red-Black-Tree/index.html">
   
     <link rel="alternate" href="/atom.xml" title="amb1t10n&#39;s blog" type="application/atom+xml">
   
@@ -340,318 +349,141 @@
 </aside>
 
   
-  <main class="main" role="main">
   
-  <div class="content article-list">
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Red-Black-Tree" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
+    <div class="article-header">
+      
+        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/07/Database-Chapter-2/">Database Chapter 2</a>
+    <h1 class="article-title" itemprop="name">
+      Red-Black Tree
     </h1>
   
 
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/03/07/Database-Chapter-2/" class="article-date">
-	  <time datetime="2021-03-07T12:28:52.000Z" itemprop="datePublished">3月 7</time>
-	</a>
-</span>
-    
-    
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/07/Database-Chapter-2/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/06/Red-Black-Tree/">Red-Black Tree</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
+      
+      <div class="article-meta">
+        <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2021/03/06/Red-Black-Tree/" class="article-date">
-	  <time datetime="2021-03-06T06:01:56.000Z" itemprop="datePublished">3月 6</time>
+	  <time datetime="2021-03-06T06:01:56.000Z" itemprop="datePublished">2021-03-06</time>
 	</a>
 </span>
-    
-    
+        
+        
   <span class="article-tag">
     <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/ads/" rel="tag">ads</a>
   </span>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/06/Red-Black-Tree/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
+        
 
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/04/Database-note/">Database Chapter 1</a>
-    </h1>
-  
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/06/Red-Black-Tree/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><strong>Definition</strong> : A red-black tree is a binary search tree that satisfies the following red-black properties :</p>
+<ul>
+<li>Every node is either red or black</li>
+<li>The root is black</li>
+<li>Every leaf is black</li>
+<li>If a node is red, then both its children are black</li>
+<li>For each node, all simple paths from the node to descendant leaves contain the same number of black nodes</li>
+</ul>
+<p><img src="C:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210306140553142.png" alt="image-20210306140553142" /></p>
+<p>**Definition: ** The black-height of any node x, denoted by <strong>bh(x)</strong> , is the number of black nodes on any simple path from x (x not included) down to a <a href="http://leaf.bh" target="_blank" rel="noopener">leaf.bh</a>(Tree) = bh(root).</p>
+<p><strong>Lemma</strong>:  A red-black tree with N internal nodes has height at most <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>ln</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>N</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">2\ln(N+1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">ln</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<p><img src="C:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210306141838721.png" alt="image-20210306141838721" /></p>
+<h3 id="insert"><a class="markdownIt-Anchor" href="#insert"></a> Insert</h3>
+<p>Sketch of the idea : Insert &amp; color <font color = red>red</font></p>
+<p><img src="C:%5CUsers%5Camb1t10n%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210306164730557.png" alt="image-20210306164730557" /></p>
+<p>case 1 : 父辈颜色相同，改变颜色即可</p>
+<p>case 2 ：父辈颜色不同，如果新加入的节点在右边，则转换为左边。如果新加入的在左边，先进行调整颜色，再旋转。</p>
+<p>注：调整颜色即将冲突节点保持红色，父辈为黑色，祖父为红色。</p>
 
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://amb1t10n.github.io/2021/03/06/Red-Black-Tree/" title="Red-Black Tree" target="_blank" rel="external">http://amb1t10n.github.io/2021/03/06/Red-Black-Tree/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">Amb1t10n</span><small class="ml-1x">Student</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
+</div>
+
+
+    </div>
+  </article>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/03/04/Database-note/" class="article-date">
-	  <time datetime="2021-03-04T12:12:57.000Z" itemprop="datePublished">3月 4</time>
-	</a>
-</span>
     
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
     
+  </section>
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/04/Database-note/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
 
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/17/%E7%A6%BB%E6%95%A3%E7%AC%94%E8%AE%B0/">离散笔记</a>
-    </h1>
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
-
-  </div>
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/03/07/Database-Chapter-2/" title="Database Chapter 2"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/03/04/Database-note/" title="Database Chapter 1"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/05/17/%E7%A6%BB%E6%95%A3%E7%AC%94%E8%AE%B0/" class="article-date">
-	  <time datetime="2020-05-17T04:17:22.606Z" itemprop="datePublished">5月 17</time>
-	</a>
-</span>
-    
-    
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/17/%E7%A6%BB%E6%95%A3%E7%AC%94%E8%AE%B0/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/14/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">物联网安全实验报告</a>
-    </h1>
   
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/04/14/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" class="article-date">
-	  <time datetime="2020-04-14T08:08:31.957Z" itemprop="datePublished">4月 14</time>
-	</a>
-</span>
+  <div class="bar-right">
     
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/report/" rel="tag">report</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/14/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/31/buffer-overflow/">buffer overflow</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/03/31/buffer-overflow/" class="article-date">
-	  <time datetime="2020-03-31T12:06:33.000Z" itemprop="datePublished">3月 31</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/report/" rel="tag">report</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/31/buffer-overflow/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/31/wireshark-%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">Wireshark抓包实验报告</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/03/31/wireshark-%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" class="article-date">
-	  <time datetime="2020-03-31T12:06:33.000Z" itemprop="datePublished">3月 31</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/report/" rel="tag">report</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/31/wireshark-%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/23/%E6%B1%87%E7%BC%96%E7%AC%94%E8%AE%B0/">汇编笔记</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/03/23/%E6%B1%87%E7%BC%96%E7%AC%94%E8%AE%B0/" class="article-date">
-	  <time datetime="2020-03-23T04:59:54.555Z" itemprop="datePublished">3月 23</time>
-	</a>
-</span>
-    
-    
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/23/%E6%B1%87%E7%BC%96%E7%AC%94%E8%AE%B0/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/page/">Note of Discrete Mathematics and Its Applications</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/03/01/page/" class="article-date">
-	  <time datetime="2020-03-01T08:00:48.000Z" itemprop="datePublished">3月 1</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/note/">note</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/study/" rel="tag">study</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/01/page/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/14/my-annual-summary/">C语言指针</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/01/14/my-annual-summary/" class="article-date">
-	  <time datetime="2020-01-14T01:58:48.000Z" itemprop="datePublished">1月 14</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/study/" rel="tag">study</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/01/14/my-annual-summary/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
     
   </div>
+  </div>
+</nav>
+  
 
-   
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -716,6 +548,33 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
    
 
 
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
